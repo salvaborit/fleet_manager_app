@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SubmitButton from './SubmitButton';
+import NavigationBar from './NavigationBar';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -26,6 +28,8 @@ const LoginForm = () => {
     // handle any errors and set errorMessage
 
   return (
+    <div>
+  
     <form onSubmit={handleSubmit}>
         <input
         type="text"
@@ -40,7 +44,8 @@ const LoginForm = () => {
         placeholder='Contraseña' />
         <SubmitButton/>
         </form>
-        )
-}
+        </div>
+        );
+};
 
 export default LoginForm;
