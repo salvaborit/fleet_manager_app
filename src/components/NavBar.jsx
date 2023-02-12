@@ -15,7 +15,7 @@ function NavBar({ isOpenMenu }) {
   const navIconSize = 25;
   const primNavItems = [
     {
-      name: "Vehicles",
+      name: "vehicles",
       route: "/vehicles",
       icon: <BsTruck size={navIconSize} />,
       actions: [
@@ -32,7 +32,7 @@ function NavBar({ isOpenMenu }) {
       ],
     },
     {
-      name: "Drivers",
+      name: "drivers",
       route: "/drivers",
       icon: <BsPeople size={navIconSize} />,
       actions: [
@@ -49,31 +49,31 @@ function NavBar({ isOpenMenu }) {
       ],
     },
     {
-      name: "Docs",
-      route: "/documentations",
+      name: "docs",
+      route: "/docs",
       icon: <BsFileEarmarkText size={navIconSize} />,
       actions: [
         {
           title: "Vehicles",
           icon: <BsTruck />,
-          route: "/documentations/vehicles",
+          route: "/docs/vehicles",
         },
         {
           title: "Drivers",
           icon: <BsPeople />,
-          route: "/documentations/drivers",
+          route: "/docs/drivers",
         },
       ],
     },
   ];
   const secNavItems = [
     {
-      name: "Settings",
+      name: "settings",
       route: "/settings",
       icon: <BsGear size={navIconSize} />,
     },
     {
-      name: "Logout",
+      name: "logout",
       route: "/",
       icon: <BsArrowBarLeft size={navIconSize} />,
     },
@@ -82,11 +82,11 @@ function NavBar({ isOpenMenu }) {
   // OPEN MENU
   if (isOpenMenu) {
     return (
-      <div
+      <nav
         className="flex flex-col justify-between items-center self-center
-                 h-full bg-gray-200 py-4"
+                 h-full bg-neutral-200 py-4"
       >
-        <div className="flex flex-col space-y-4 rounded-xl">
+        <ul className="flex flex-col space-y-4 rounded-xl">
           {primNavItems.map((item) => {
             return (
               <NavItemOpen
@@ -98,8 +98,8 @@ function NavBar({ isOpenMenu }) {
               />
             );
           })}
-        </div>
-        <div className="flex flex-col space-y-4">
+        </ul>
+        <ul className="flex flex-col space-y-4">
           {secNavItems.map((item) => {
             return (
               <NavItemOpen
@@ -110,17 +110,17 @@ function NavBar({ isOpenMenu }) {
               />
             );
           })}
-        </div>
-      </div>
+        </ul>
+      </nav>
     );
   } else {
     // COLLAPSED MENU
     return (
-      <div
+      <nav
         className="flex flex-col justify-between items-center self-center
-                 h-full bg-gray-200 px-1 py-4"
+                 h-full bg-neutral-200 px-1 py-4"
       >
-        <div className="flex flex-col space-y-2 rounded-xl">
+        <ul className="flex flex-col space-y-2 rounded-xl">
           {primNavItems.map((item) => {
             return (
               <NavItem
@@ -131,8 +131,8 @@ function NavBar({ isOpenMenu }) {
               />
             );
           })}
-        </div>
-        <div className="flex flex-col space-y-2">
+        </ul>
+        <ul className="flex flex-col space-y-2">
           {secNavItems.map((item) => {
             return (
               <NavItem
@@ -143,8 +143,8 @@ function NavBar({ isOpenMenu }) {
               />
             );
           })}
-        </div>
-      </div>
+        </ul>
+      </nav>
     );
   }
 }

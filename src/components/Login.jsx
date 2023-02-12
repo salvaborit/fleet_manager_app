@@ -3,7 +3,7 @@ import React from "react";
 function Login() {
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="flex flex-col bg-gray-200 rounded-2xl p-4">
+      <div className="flex flex-col bg-neutral-200 rounded-2xl p-4">
         <input
           type="text"
           placeholder="Username"
@@ -16,7 +16,7 @@ function Login() {
         />
         <button
           type="submit"
-          className="bg-gray-300 hover:bg-gray-400 rounded-lg py-2 px-4 mt-2 w-min self-center text-gray-600 hover:text-neutral-50"
+          className="bg-neutral-300 hover:bg-neutral-400 rounded-lg py-2 px-4 mt-2 w-min self-center text-neutral-600 hover:text-neutral-50"
         >
           Login
         </button>

@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { VscLoading } from "react-icons/vsc";
+import VehiclesListItem from "./VehiclesListItem";
 
 function VehiclesList() {
   const [vehiclesList, setVehiclesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const fetchData = async () => {
+    const resp = await axios.get("http://localhost:8000/vehicles/");
+    setVehiclesList(resp.data);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const resp = await axios.get("http://localhost:8000/vehicles/", {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
-      setVehiclesList(resp.data);
-    };
     fetchData();
     setIsLoading(false);
   }, []);
@@ -26,35 +26,25 @@ function VehiclesList() {
         </div>
       </div>
     );
+  } else {
+    return (
+      <div className="container w-full h-full flex flex-col space-y-4">
+        {vehiclesList.map((v) => {
+          return (
+            <VehiclesListItem
+              key={v.id}
+              license={v.license_plate}
+              model={v.model}
+              status={v.status}
+              usage={`${v.usage.toLocaleString("en-us")} ${
+                v.usage_type === "HR" ? "hs" : "kms"
+              }`}
+            />
+          );
+        })}
+      </div>
+    );
   }
-  return (
-    <>
-      <table className="w-full border-black border-2">
-        <thead>
-          <tr>
-            <td className="border-black border-2">License</td>
-            <td className="border-black border-2">Model</td>
-            <td className="border-black border-2">Status</td>
-            <td className="border-black border-2">Usage type</td>
-            <td className="border-black border-2">Usage</td>
-          </tr>
-        </thead>
-        <tbody>
-          {vehiclesList.map((v) => {
-            return (
-              <tr key={v.id}>
-                <td>{v.license_plate}</td>
-                <td>{v.model}</td>
-                <td>{v.status}</td>
-                <td>{v.usage_type}</td>
-                <td>{v.usage}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </>
-  );
 }
 
 export default VehiclesList;
