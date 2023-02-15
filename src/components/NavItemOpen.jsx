@@ -9,7 +9,7 @@ function NavItemOpen({ name, icon, route, actions }) {
       <div>
         <Link
           to={route}
-          className="relative flex flex-row text-center items-center
+          className="relative flex text-center items-center
               align-center rounded-lg px-3 py-1 mx-3 w-44
                text-neutral-600 hover:bg-neutral-300"
         >
@@ -25,7 +25,7 @@ function NavItemOpen({ name, icon, route, actions }) {
             return (
               <Link to={action.route} key={action.route}>
                 <li
-                  className={`flex flex-row space-x-4 mx-8 ml-6 px-2 text-sm
+                  className={`flex space-x-4 mx-8 ml-6 px-2 text-sm
                 items-center mb-1 hover:bg-neutral-300 rounded-lg
                 ${location.pathname === action.route && "bg-red-300"}`}
                 >

@@ -1,28 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
+
 import { BsPlusCircle, BsSliders } from "react-icons/bs";
 
-function VehiclesToolbar() {
-  return (
-    <div
-      className="w-full border-neutral-400 border-b-2 pb-1
-                 flex flex-row items-end space-x-2 mb-14 px-32"
-    >
-      <h1 className="text-5xl mr-16 mb-1">Vehicles</h1>
+import ToolbarButton from "./ToolbarButton";
+import VehicleToolbarFilters from "./VehicleToolbarFilters";
+import VehicleToolbarNew from "./VehicleToolbarNew";
 
-      <button
-        className="flex flex-row items-center justify-center hover:bg-red-200
-       px-4 py-1 space-x-2 rounded-full"
-      >
-        <BsSliders />
-        <p>Filters</p>
-      </button>
-      <button
-        className="flex flex-row items-center justify-center hover:bg-red-200
-       px-4 py-1 space-x-2 rounded-full"
-      >
-        <BsPlusCircle />
-        <p>New vehicle</p>
-      </button>
+function VehiclesToolbar() {
+  const [activeButton, setActiveButton] = useState(null);
+
+  const buttons = [
+    {
+      name: "filter",
+      title: "Filters",
+      icon: <BsSliders />,
+      dropdown: <VehicleToolbarFilters />,
+    },
+    {
+      name: "add",
+      title: "Add Vehicle",
+      icon: <BsPlusCircle />,
+      dropdown: <VehicleToolbarNew />,
+    },
+  ];
+
+  function toggleDropdown(btn) {
+    if (activeButton) {
+      if (btn.name === activeButton.name) {
+        setActiveButton(null);
+      } else {
+        setActiveButton(btn);
+      }
+    } else {
+      setActiveButton(btn);
+    }
+  }
+
+  return (
+    <div className="flex flex-col mb-14 px-32 border-neutral-400 border-b-2 pb-1">
+      <div className="w-full flex items-end space-x-2">
+        <h1 className="text-5xl mr-16 mb-1">Vehicles</h1>
+        <div className="flex">
+          {buttons.map((btn) => {
+            return (
+              <ToolbarButton
+                key={btn.name}
+                btn={btn}
+                toggleDropdown={toggleDropdown}
+                activeButton={activeButton}
+              />
+            );
+          })}
+        </div>
+      </div>
+      {activeButton && activeButton.dropdown}
     </div>
   );
 }

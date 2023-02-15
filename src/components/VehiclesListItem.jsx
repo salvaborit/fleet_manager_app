@@ -13,15 +13,15 @@ function VehiclesListItem({ license, model, status, usage }) {
 
   return (
     <div
-      className="flex flex-row items-center mb-2 space-x-20 rounded-lg
-     hover:bg-neutral-300 justify-between"
+      className="flex items-center mb-2 space-x-20 rounded-lg
+     hover:bg-neutral-200 justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <img
         src="/assets/images/truck.png"
         alt="truck"
-        className="aspect-square w-40 rounded-l-lg"
+        className="aspect-square w-28 rounded-l-lg"
       />
       <div className="flex flex-col w-1/3">
         <h1 className="text-3xl font-bold">{model}</h1>
@@ -35,23 +35,27 @@ function VehiclesListItem({ license, model, status, usage }) {
           <b>Usage:</b> {usage}
         </h3>
       </div>
-      <div className={`pr-8 space-y-2 ${isHovered ? "visible" : "invisible"}`}>
+      <div
+        className={`pr-8 space-y-1 text-sm px-2 ${
+          isHovered ? "visible" : "invisible"
+        }`}
+      >
         <button
-          className="flex flex-row items-center justify-center hover:bg-red-300
+          className="flex items-center justify-center hover:bg-red-300
        px-4 py-1 space-x-2 rounded-full"
         >
           <BsList />
           <p>View</p>
         </button>
         <button
-          className="flex flex-row items-center justify-center hover:bg-red-300
+          className="flex items-center justify-center hover:bg-red-300
        px-4 py-1 space-x-2 rounded-full"
         >
           <BsPencil />
           <p>Edit</p>
         </button>
         <button
-          className="flex flex-row items-center justify-center hover:bg-red-300
+          className="flex items-center justify-center hover:bg-red-300
        px-4 py-1 space-x-2 rounded-full"
         >
           <BsTrashFill />

@@ -12,6 +12,7 @@ import SettingsRoute from "./components/SettingsRoute";
 import HelpRoute from "./components/HelpRoute";
 import HomeRoute from "./components/HomeRoute";
 import TopBar from "./components/TopBar";
+import VehicleToolbarFilters from "./components/VehicleToolbarFilters";
 
 function App() {
   const routes = useRoutes([
@@ -28,7 +29,18 @@ function App() {
     {
       path: "/vehicles",
       element: <VehiclesRoute />,
-      children: [],
+      children: [
+        {
+          path: "/vehicles/filters",
+          element: (
+            <VehiclesRoute toolbarDropdown={<VehicleToolbarFilters />} />
+          ),
+        },
+        {
+          path: "/vehicles/new",
+          element: <VehiclesRoute toolbarDropdown={<></>} />,
+        },
+      ],
     },
     {
       path: "/drivers",
@@ -77,7 +89,7 @@ function App() {
                  bg-neutral-100 flex flex-col"
     >
       <TopBar isOpenMenu={isOpenMenu} toggleMenu={toggleMenu} />
-      <div className="w-full h-full flex flex-row">
+      <div className="w-full h-full flex">
         <NavBar isOpenMenu={isOpenMenu} />
         {routes}
       </div>
