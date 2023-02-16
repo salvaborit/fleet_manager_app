@@ -40,7 +40,7 @@ function VehiclesToolbar() {
     <div className="flex flex-col mb-14 px-32 border-neutral-400 border-b-2 pb-1">
       <div className="w-full flex items-end space-x-2">
         <h1 className="text-5xl mr-16 mb-1">Vehicles</h1>
-        <div className="flex">
+        <div className="flex space-x-2">
           {buttons.map((btn) => {
             return (
               <ToolbarButton

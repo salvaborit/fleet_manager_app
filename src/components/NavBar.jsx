@@ -99,7 +99,7 @@ function NavBar({ isOpenMenu }) {
             );
           })}
         </ul>
-        <ul className="flex flex-col space-y-4">
+        <ul className="flex flex-col space-y-4 pr-1">
           {secNavItems.map((item) => {
             return (
               <NavItemOpen
