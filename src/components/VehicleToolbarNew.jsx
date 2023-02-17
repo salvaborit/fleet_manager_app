@@ -37,7 +37,10 @@ function VehicleToolbarNew() {
       usage,
       notes,
     };
-    axios.post("http://localhost:8000/vehicles/", postBody).then(navigate(0));
+    axios
+      .post("http://localhost:8000/vehicles/", postBody)
+      .then(navigate(0))
+      .catch((err) => console.error(err));
   }
 
   return (
