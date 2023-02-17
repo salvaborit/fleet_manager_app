@@ -9,6 +9,20 @@ function VehiclesListItem({ license, model, status, usage }) {
     IN: "INACTIVE",
   };
 
+  function renderStatusColorCode() {
+    const statusName = STATUSES[status];
+    let color = "";
+    if (statusName === "ACTIVE") {
+      color = "bg-green-500";
+    } else if (statusName === "MAINTENANCE" || statusName === "REPAIRS") {
+      color = "bg-yellow-500";
+    } else {
+      color = "bg-red-500";
+    }
+
+    return <div className={`${color} w-3 h-3 rounded-full`}></div>;
+  }
+
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -28,9 +42,14 @@ function VehiclesListItem({ license, model, status, usage }) {
         <h2 className="text-xl">{license}</h2>
       </div>
       <div>
-        <h3 className="text-md">
-          <b>Status:</b> {STATUSES[status]}
-        </h3>
+        <div className="flex items-center">
+          <h3 className="text-md flex">
+            <b>Status: &nbsp;</b> {STATUSES[status]}
+          </h3>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <div className="">{renderStatusColorCode()}</div>
+        </div>
         <h3 className="text-md">
           <b>Usage:</b> {usage}
         </h3>
