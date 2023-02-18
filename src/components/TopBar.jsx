@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function TopBar({ isOpenMenu, toggleMenu }) {
   const iconSize = 20;
   return (
-    <div className="relative w-full bg-neutral-200 flex items-center justify-between px-5">
+    <div className="z-10 fixed w-full bg-neutral-200 flex items-center justify-between px-5">
       <div
         className="rounded-full p-2 text-neutral-600 hover:bg-neutral-300"
         onClick={toggleMenu}
@@ -17,7 +17,7 @@ function TopBar({ isOpenMenu, toggleMenu }) {
         <input
           type="text"
           placeholder="Search"
-          className="rounded-l-3xl py-2 px-8 h-8 my-2 bg-neutral-300"
+          className="z-10 rounded-l-3xl py-2 px-8 h-8 my-2 bg-neutral-300"
         />
         <div
           className="w-12 h-8 rounded-r-full bg-neutral-300

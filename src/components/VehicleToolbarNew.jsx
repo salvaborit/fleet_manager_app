@@ -1,17 +1,46 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { BsPlus } from "react-icons/bs";
+import React from "react";
+
+import { BsPlusLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-function VehicleToolbarNew() {
-  const [license, setLicense] = useState("");
-  const [model, setModel] = useState("");
-  const [status, setStatus] = useState("");
-  const [usageType, setUsageType] = useState("");
-  const [usage, setUsage] = useState("");
-  const [notes, setNotes] = useState("");
+import { useFormik } from "formik";
+import { userSchema } from "../validations/newUser";
 
+function VehicleToolbarNew() {
   const navigate = useNavigate();
+
+  function onSubmit(values, actions) {
+    axios
+      .post("http://localhost:8000/vehicles/", values)
+      .then((resp) => {
+        console.log(resp.status);
+        actions.resetForm();
+        navigate(0);
+      })
+      .catch((err) => console.error(err));
+  }
+
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+  } = useFormik({
+    initialValues: {
+      license_plate: "",
+      model: "",
+      status: "",
+      usage: "",
+      usage_type: "",
+      notes: "",
+    },
+    validationSchema: userSchema,
+    onSubmit: onSubmit,
+  });
 
   const usageTypes = [
     { apiName: 0, humanName: "--" },
@@ -27,71 +56,87 @@ function VehicleToolbarNew() {
     { apiName: "IN", humanName: "Inactive" },
   ];
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const postBody = {
-      license_plate: license,
-      model,
-      status,
-      usage_type: usageType,
-      usage,
-      notes,
-    };
-    axios
-      .post("http://localhost:8000/vehicles/", postBody)
-      .then(navigate(0))
-      .catch((err) => console.error(err));
-  }
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   const postBody = {};
+  //   axios
+  //     .post("http://localhost:8000/vehicles/", postBody)
+  //     .then(navigate(0))
+  //     .catch((err) => console.error(err));
+  // }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="container w-full mt-8 pb-6 flex flex-col space-y-4"
+      autoComplete="off"
+      className="container w-full mt-8 pb-6 flex flex-col space-y-2"
     >
       <div className="flex space-x-10">
         <div className="flex flex-col">
           <label
-            htmlFor="license"
+            htmlFor="license_plate"
             className="ml-2 mb-1 text-sm text-neutral-600"
           >
             License
           </label>
           <input
             type="text"
-            onChange={(e) => setLicense(e.target.value)}
-            className="px-4 py-1 rounded-lg bg-neutral-200
+            name="license_plate"
+            value={values.license_plate}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`px-4 py-1 rounded-lg bg-neutral-200
              text-neutral-800 placeholder:text-neutral-500
-             w-40 focus:border-transparent focus:outline-none"
-            placeholder="SOF1696..."
+             w-40 focus:border-transparent focus:outline-none
+             ${
+               errors.license_plate &&
+               touched.license_plate &&
+               "border-red-500 border-2"
+             }`}
+            placeholder="SOF1696"
           />
+          {errors.license_plate && touched.license_plate && (
+            <p className="text-xs text-red-500 mt-1 ml-2">
+              {errors.license_plate}
+            </p>
+          )}
         </div>
         <div className="flex flex-col">
-          <label
-            htmlFor="license"
-            className="ml-2 mb-1 text-sm text-neutral-600"
-          >
+          <label htmlFor="model" className="ml-2 mb-1 text-sm text-neutral-600">
             Model
           </label>
           <input
             type="text"
-            onChange={(e) => setModel(e.target.value)}
-            className="px-4 py-1 rounded-lg bg-neutral-200
+            name="model"
+            value={values.model}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`px-4 py-1 rounded-lg bg-neutral-200
              text-neutral-800 placeholder:text-neutral-500
-             focus:border-transparent focus:outline-none"
-            placeholder="Scania P410X.."
+             focus:border-transparent focus:outline-none ${
+               errors.model && touched.model && "border-red-500 border-2"
+             }`}
+            placeholder="Scania P410X"
           />
+          {errors.model && touched.model && (
+            <p className="text-xs text-red-500 mt-1 ml-2">{errors.model}</p>
+          )}
         </div>
         <div className="flex flex-col">
           <label
-            htmlFor="license"
+            htmlFor="status"
             className="ml-2 mb-1 text-sm text-neutral-600"
           >
             Status
           </label>
           <select
-            onChange={(e) => setStatus(e.target.value)}
-            className="px-6 py-2 rounded-lg bg-neutral-200
-             text-neutral-800 hover:bg-neutral-300"
+            name="status"
+            value={values.status}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`px-6 py-2 rounded-lg bg-neutral-200
+             text-neutral-800 hover:bg-neutral-300
+             ${errors.usage && touched.usage && "border-red-500 border-2"}`}
           >
             {statuses.map((item) => {
               return (
@@ -101,29 +146,42 @@ function VehicleToolbarNew() {
               );
             })}
           </select>
+          {errors.status && touched.status && (
+            <p className="text-xs text-red-500 mt-1 ml-2">{errors.status}</p>
+          )}
         </div>
       </div>
       <div className="relative flex space-x-10">
         <div className="flex flex-col">
-          <label
-            htmlFor="license"
-            className="ml-2 mb-1 text-sm text-neutral-600"
-          >
+          <label htmlFor="usage" className="ml-2 mb-1 text-sm text-neutral-600">
             Usage
           </label>
           <div className="flex relative">
             <input
               type="text"
-              onChange={(e) => setUsage(e.target.value)}
-              className="px-4 py-1 rounded-l-lg bg-neutral-200
+              name="usage"
+              value={values.usage}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={`px-4 py-1 rounded-l-lg bg-neutral-200
                  text-neutral-800 placeholder:text-neutral-500
-                 w-48 focus:border-transparent focus:outline-none"
+                 w-48 focus:border-transparent focus:outline-none ${
+                   errors.usage && touched.usage && "border-red-500 border-2"
+                 }`}
               placeholder="Usage in km or h"
             />
             <select
-              onChange={(e) => setUsageType(e.target.value)}
-              className="px-6 py-1 rounded-r-lg bg-neutral-200
-             text-neutral-800 hover:bg-neutral-300 border-l-2 border-neutral-300"
+              name="usage_type"
+              value={values.usage_type}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={`px-6 py-1 rounded-r-lg bg-neutral-200
+             text-neutral-800 hover:bg-neutral-300 border-l-2 border-neutral-300
+             ${
+               errors.usage_type &&
+               touched.usage_type &&
+               "border-red-500 border-2"
+             }`}
             >
               {usageTypes.map((item) => {
                 return (
@@ -134,11 +192,24 @@ function VehicleToolbarNew() {
               })}
             </select>
           </div>
+          <div className="flex justify-between">
+            {errors.usage && touched.usage && (
+              <p className="text-xs text-red-500 mt-1 mx-2 flex-wrap">
+                {errors.usage}
+              </p>
+            )}
+            {errors.usage_type && touched.usage_type && (
+              <p className="text-xs text-red-500 mt-1 mx-2 flex-wrap">
+                {errors.usage_type}
+              </p>
+            )}
+          </div>
           <button
             type="submit"
+            disabled={isSubmitting}
             className="absolute bottom-0 right-0 py-4 px-4 rounded-full bg-red-300 hover:bg-red-400"
           >
-            <BsPlus />
+            <BsPlusLg />
           </button>
         </div>
         <div className="flex flex-col">
@@ -151,10 +222,14 @@ function VehicleToolbarNew() {
           <div className="flex">
             <input
               type="text"
-              onChange={(e) => setNotes(e.target.value)}
-              className="px-4 py-1 w-full rounded-lg bg-neutral-200
+              name="notes"
+              value={values.notes}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={`px-4 py-1 w-full rounded-lg bg-neutral-200
                text-neutral-800 placeholder:text-neutral-500
-               focus:border-transparent focus:outline-none"
+               focus:border-transparent focus:outline-none
+               ${errors.notes && touched.notes && "border-red-500 border-2"}`}
               placeholder="Add custom notes here..."
             />
           </div>

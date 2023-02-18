@@ -28,7 +28,7 @@ function VehiclesList() {
     );
   } else {
     return (
-      <div className="container w-full h-full flex flex-col space-y-4">
+      <div className="container w-full h-full flex flex-col space-y-4 overflow-y-auto">
         {vehiclesList.map((v) => {
           return (
             <VehiclesListItem

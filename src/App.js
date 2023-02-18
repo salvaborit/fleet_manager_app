@@ -85,11 +85,11 @@ function App() {
 
   return (
     <div
-      className="w-screen h-screen
-                 bg-neutral-100 flex flex-col"
+      className="w-full h-full
+                 bg-neutral-100"
     >
       <TopBar isOpenMenu={isOpenMenu} toggleMenu={toggleMenu} />
-      <div className="w-full h-full flex">
+      <div className="w-full h-full">
         <NavBar isOpenMenu={isOpenMenu} />
         {routes}
       </div>

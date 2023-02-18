@@ -16,7 +16,7 @@ function VehicleToolbarFilters() {
   ];
 
   return (
-    <form className="container w-full mt-8 pb-6 flex flex-col space-y-4">
+    <form className="container w-full mt-8 pb-6 flex flex-col space-y-2">
       <div className="flex space-x-10">
         <div className="flex flex-col">
           <label

@@ -79,15 +79,14 @@ function NavBar({ isOpenMenu }) {
     },
   ];
 
-  // OPEN MENU
-  if (isOpenMenu) {
-    return (
-      <nav
-        className="flex flex-col justify-between items-center self-center
-                 h-full bg-neutral-200 py-4"
-      >
-        <ul className="flex flex-col space-y-4 rounded-xl">
-          {primNavItems.map((item) => {
+  return (
+    <nav
+      className="fixed flex flex-col justify-between items-center self-center
+                 h-full bg-neutral-200 pb-4 pt-14"
+    >
+      <ul className="flex flex-col space-y-4 rounded-xl">
+        {primNavItems.map((item) => {
+          if (isOpenMenu) {
             return (
               <NavItemOpen
                 key={item.route}
@@ -97,10 +96,21 @@ function NavBar({ isOpenMenu }) {
                 actions={item.actions}
               />
             );
-          })}
-        </ul>
-        <ul className="flex flex-col space-y-4 pr-1">
-          {secNavItems.map((item) => {
+          } else {
+            return (
+              <NavItem
+                key={item.route}
+                name={item.name}
+                route={item.route}
+                icon={item.icon}
+              />
+            );
+          }
+        })}
+      </ul>
+      <ul className="flex flex-col space-y-4 pr-1">
+        {secNavItems.map((item) => {
+          if (isOpenMenu) {
             return (
               <NavItemOpen
                 key={item.route}
@@ -109,31 +119,7 @@ function NavBar({ isOpenMenu }) {
                 name={item.name}
               />
             );
-          })}
-        </ul>
-      </nav>
-    );
-  } else {
-    // COLLAPSED MENU
-    return (
-      <nav
-        className="flex flex-col justify-between items-center self-center
-                 h-full bg-neutral-200 px-1 py-4"
-      >
-        <ul className="flex flex-col space-y-2 rounded-xl">
-          {primNavItems.map((item) => {
-            return (
-              <NavItem
-                key={item.route}
-                name={item.name}
-                route={item.route}
-                icon={item.icon}
-              />
-            );
-          })}
-        </ul>
-        <ul className="flex flex-col space-y-2">
-          {secNavItems.map((item) => {
+          } else {
             return (
               <NavItem
                 key={item.route}
@@ -142,11 +128,11 @@ function NavBar({ isOpenMenu }) {
                 name={item.name}
               />
             );
-          })}
-        </ul>
-      </nav>
-    );
-  }
+          }
+        })}
+      </ul>
+    </nav>
+  );
 }
 
 export default NavBar;
