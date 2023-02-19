@@ -5,7 +5,7 @@ import { BsPlusLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
-import { userSchema } from "../validations/newUser";
+import { newUserSchema } from "../validations/User";
 
 function VehicleToolbarNew() {
   const navigate = useNavigate();
@@ -14,7 +14,6 @@ function VehicleToolbarNew() {
     axios
       .post("http://localhost:8000/vehicles/", values)
       .then((resp) => {
-        console.log(resp.status);
         actions.resetForm();
         navigate(0);
       })
@@ -38,7 +37,7 @@ function VehicleToolbarNew() {
       usage_type: "",
       notes: "",
     },
-    validationSchema: userSchema,
+    validationSchema: newUserSchema,
     onSubmit: onSubmit,
   });
 
@@ -55,15 +54,6 @@ function VehicleToolbarNew() {
     { apiName: "TA", humanName: "Repairs" },
     { apiName: "IN", humanName: "Inactive" },
   ];
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   const postBody = {};
-  //   axios
-  //     .post("http://localhost:8000/vehicles/", postBody)
-  //     .then(navigate(0))
-  //     .catch((err) => console.error(err));
-  // }
 
   return (
     <form
@@ -136,7 +126,7 @@ function VehicleToolbarNew() {
             onBlur={handleBlur}
             className={`px-6 py-2 rounded-lg bg-neutral-200
              text-neutral-800 hover:bg-neutral-300
-             ${errors.usage && touched.usage && "border-red-500 border-2"}`}
+             ${errors.status && touched.status && "border-red-500 border-2"}`}
           >
             {statuses.map((item) => {
               return (

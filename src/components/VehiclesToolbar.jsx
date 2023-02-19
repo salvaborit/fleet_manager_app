@@ -6,7 +6,7 @@ import ToolbarButton from "./ToolbarButton";
 import VehicleToolbarFilters from "./VehicleToolbarFilters";
 import VehicleToolbarNew from "./VehicleToolbarNew";
 
-function VehiclesToolbar() {
+function VehiclesToolbar({ fetchFilteredData }) {
   const [activeButton, setActiveButton] = useState(null);
 
   const buttons = [
@@ -14,7 +14,7 @@ function VehiclesToolbar() {
       name: "filter",
       title: "Filters",
       icon: <BsSliders />,
-      dropdown: <VehicleToolbarFilters />,
+      dropdown: <VehicleToolbarFilters fetchFilteredData={fetchFilteredData} />,
     },
     {
       name: "add",

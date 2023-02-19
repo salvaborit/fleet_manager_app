@@ -91,7 +91,7 @@ function App() {
       <TopBar isOpenMenu={isOpenMenu} toggleMenu={toggleMenu} />
       <div className="w-full h-full">
         <NavBar isOpenMenu={isOpenMenu} />
-        {routes}
+        <div className="pl-20">{routes}</div>
       </div>
     </div>
   );
