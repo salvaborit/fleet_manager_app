@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { BsList, BsPencil, BsTrashFill } from "react-icons/bs";
+import DeleteVehicleModal from "./DeleteVehicleModal";
 
-function VehiclesListItem({ license, model, status, usage }) {
+function VehiclesListItem({ vehicle }) {
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+
+  function toggleDeleteModal() {
+    setIsOpenDeleteModal(!isOpenDeleteModal);
+  }
+
   const STATUSES = {
     AC: "ACTIVE",
     MA: "MAINTENANCE",
@@ -10,7 +17,7 @@ function VehiclesListItem({ license, model, status, usage }) {
   };
 
   function renderStatusColorCode() {
-    const statusName = STATUSES[status];
+    const statusName = STATUSES[vehicle.status];
     let color = "";
     if (statusName === "ACTIVE") {
       color = "bg-green-500";
@@ -26,62 +33,74 @@ function VehiclesListItem({ license, model, status, usage }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
-      className="flex items-center mb-2 space-x-20 rounded-lg
-     hover:bg-neutral-200 justify-between"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <img
-        src="/assets/images/truck.png"
-        alt="truck"
-        className="aspect-square w-28 rounded-l-lg"
-      />
-      <div className="flex flex-col w-1/3">
-        <h1 className="text-3xl font-bold">{model}</h1>
-        <h2 className="text-xl">{license}</h2>
-      </div>
-      <div>
-        <div className="flex items-center">
-          <h3 className="text-md flex">
-            <b>Status: &nbsp;</b> {STATUSES[status]}
-          </h3>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <div className="">{renderStatusColorCode()}</div>
-        </div>
-        <h3 className="text-md">
-          <b>Usage:</b> {usage}
-        </h3>
-      </div>
+    <>
       <div
-        className={`pr-8 space-y-1 text-sm px-2 ${
-          isHovered ? "visible" : "invisible"
-        }`}
+        className="flex items-center mb-2 space-x-20 rounded-lg
+       hover:bg-neutral-200 justify-between"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <button
-          className="flex items-center justify-center hover:bg-red-300
-       px-4 py-1 space-x-2 rounded-full"
+        <img
+          src="/assets/images/truck.png"
+          alt="truck"
+          className="aspect-square w-28 rounded-l-lg"
+        />
+        <div className="flex flex-col w-1/3">
+          <h1 className="text-3xl font-bold">{vehicle.model}</h1>
+          <h2 className="text-xl">{vehicle.license_plate}</h2>
+        </div>
+        <div>
+          <div className="flex items-center">
+            <h3 className="text-md flex">
+              <b>Status: &nbsp;</b> {STATUSES[vehicle.status]}
+            </h3>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <div className="">{renderStatusColorCode()}</div>
+          </div>
+          <h3 className="text-md">
+            <b>Usage:</b>{" "}
+            {`${vehicle.usage.toLocaleString("en-us")} ${
+              vehicle.usage_type === "HR" ? "hs" : "kms"
+            }`}
+          </h3>
+        </div>
+        <div
+          className={`pr-8 space-y-1 text-sm px-2 ${
+            isHovered ? "visible" : "invisible"
+          }`}
         >
-          <BsList />
-          <p>View</p>
-        </button>
-        <button
-          className="flex items-center justify-center hover:bg-red-300
-       px-4 py-1 space-x-2 rounded-full"
-        >
-          <BsPencil />
-          <p>Edit</p>
-        </button>
-        <button
-          className="flex items-center justify-center hover:bg-red-300
-       px-4 py-1 space-x-2 rounded-full"
-        >
-          <BsTrashFill />
-          <p>Delete</p>
-        </button>
+          <button
+            className="flex items-center justify-center hover:bg-red-300
+         px-4 py-1 space-x-2 rounded-full"
+          >
+            <BsList />
+            <p>View</p>
+          </button>
+          <button
+            className="flex items-center justify-center hover:bg-red-300
+         px-4 py-1 space-x-2 rounded-full"
+          >
+            <BsPencil />
+            <p>Edit</p>
+          </button>
+          <button
+            onClick={toggleDeleteModal}
+            className="flex items-center justify-center hover:bg-red-300
+         px-4 py-1 space-x-2 rounded-full"
+          >
+            <BsTrashFill />
+            <p>Delete</p>
+          </button>
+          <DeleteVehicleModal
+            isOpen={isOpenDeleteModal}
+            toggle={toggleDeleteModal}
+            vehicle={vehicle}
+          />
+        </div>
       </div>
-    </div>
+      <div className="flex w-full h-full justify-center items-center"></div>
+    </>
   );
 }
 
