@@ -103,9 +103,8 @@ function VehicleToolbarNew() {
             onBlur={handleBlur}
             className={`px-4 py-1 rounded-lg bg-neutral-200
              text-neutral-800 placeholder:text-neutral-500
-             focus:border-transparent focus:outline-none ${
-               errors.model && touched.model && "border-red-500 border-2"
-             }`}
+             focus:border-transparent focus:outline-none
+             ${errors.model && touched.model && "border-red-500 border-2"}`}
             placeholder="Scania P410X"
           />
           {errors.model && touched.model && (
@@ -155,9 +154,8 @@ function VehicleToolbarNew() {
               onBlur={handleBlur}
               className={`px-4 py-1 rounded-l-lg bg-neutral-200
                  text-neutral-800 placeholder:text-neutral-500
-                 w-48 focus:border-transparent focus:outline-none ${
-                   errors.usage && touched.usage && "border-red-500 border-2"
-                 }`}
+                 w-48 focus:border-transparent focus:outline-none
+                 ${errors.usage && touched.usage && "border-red-500 border-2"}`}
               placeholder="Usage in km or h"
             />
             <select
