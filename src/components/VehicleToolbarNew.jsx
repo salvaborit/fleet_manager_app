@@ -2,10 +2,11 @@ import axios from "axios";
 import React from "react";
 
 import { BsPlusLg } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { newUserSchema } from "../validations/User";
+
+import { newVehicleSchema } from "../validations/vehicle";
 
 function VehicleToolbarNew() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function VehicleToolbarNew() {
       usage_type: "",
       notes: "",
     },
-    validationSchema: newUserSchema,
+    validationSchema: newVehicleSchema,
     onSubmit: onSubmit,
   });
 
@@ -201,10 +202,7 @@ function VehicleToolbarNew() {
           </button>
         </div>
         <div className="flex flex-col">
-          <label
-            htmlFor="license"
-            className="ml-2 mb-1 text-sm text-neutral-600"
-          >
+          <label htmlFor="notes" className="ml-2 mb-1 text-sm text-neutral-600">
             Notes
           </label>
           <div className="flex">

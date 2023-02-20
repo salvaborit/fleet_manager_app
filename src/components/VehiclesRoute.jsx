@@ -7,26 +7,23 @@ import VehiclesToolbar from "./VehiclesToolbar";
 function VehiclesRoute() {
   const [vehiclesList, setVehiclesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [areFiltersApplied, setAreFiltersApplied] = useState(false);
 
   async function fetchData() {
     const resp = await axios.get("http://localhost:8000/vehicles/");
-    setAreFiltersApplied(false);
     setVehiclesList(resp.data);
   }
 
   async function fetchFilteredData(queryParams) {
     let queryParamStr = "";
-    Object.keys(queryParams).map((item) => {
+    for (const item of Object.keys(queryParams)) {
       if (queryParams[item] !== "") {
         queryParamStr += `${item}=${queryParams[item]}&`;
       }
-    });
+    }
 
     const resp = await axios.get(
       `http://localhost:8000/vehicles/?${queryParamStr}`
     );
-    setAreFiltersApplied(true);
     setVehiclesList(resp.data);
   }
 

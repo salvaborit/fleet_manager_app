@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
 import { BsSearch } from "react-icons/bs";
 
-import { userFilterSchema } from "../validations/User";
+import { vehicleFilterSchema } from "../validations/vehicle";
 
 function VehicleToolbarFilters({ fetchFilteredData }) {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
       min_usage: "",
       max_usage: "",
     },
-    validationSchema: userFilterSchema,
+    validationSchema: vehicleFilterSchema,
     onSubmit: onSubmit,
   });
 

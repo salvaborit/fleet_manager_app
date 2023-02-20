@@ -15,11 +15,11 @@ function DriversRoute() {
 
   async function fetchFilteredData(queryParams) {
     let queryParamStr = "";
-    Object.keys(queryParams).map((item) => {
+    for (const item of Object.keys(queryParams)) {
       if (queryParams[item] !== "") {
         queryParamStr += `${item}=${queryParams[item]}&`;
       }
-    });
+    }
     const resp = await axios.get(
       `http://localhost:8000/drivers/?${queryParamStr}`
     );

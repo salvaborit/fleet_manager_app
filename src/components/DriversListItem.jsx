@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import {
   BsInfoCircleFill,
-  BsList,
   BsPencil,
   BsPerson,
   BsTrashFill,
 } from "react-icons/bs";
+import DeleteDriverModal from "./DeleteDriverModal";
+import EditDriverModal from "./EditDriverModal";
 import ViewDriverModal from "./ViewDriverModal";
 
 function DriversListItem({ driver }) {
@@ -37,7 +38,7 @@ function DriversListItem({ driver }) {
         <BsPerson size={80} color={"#2a2a2a"} />
       </div>
       <div className="flex flex-col">
-        <h2 className="text-3xl font-bold">
+        <h2 className="text-3xl font-bold text-center">
           {driver.first_name} {driver.last_name}
         </h2>
         <h2 className="text-xl text-center">{driver.phone}</h2>
@@ -68,11 +69,11 @@ function DriversListItem({ driver }) {
           <BsPencil />
           <p>Edit</p>
         </button>
-        {/* <EditVehicleModal
+        <EditDriverModal
           isOpen={isOpenEditModal}
           toggle={toggleEditModal}
-          vehicle={vehicle}
-        /> */}
+          driver={driver}
+        />
         <button
           onClick={toggleDeleteModal}
           className="flex items-center justify-center hover:bg-red-300
@@ -81,11 +82,11 @@ function DriversListItem({ driver }) {
           <BsTrashFill />
           <p>Delete</p>
         </button>
-        {/* <DeleteVehicleModal
+        <DeleteDriverModal
           isOpen={isOpenDeleteModal}
           toggle={toggleDeleteModal}
-          vehicle={vehicle}
-        /> */}
+          driver={driver}
+        />
       </div>
     </div>
   );

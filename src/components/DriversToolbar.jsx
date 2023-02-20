@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { BsPlusCircle, BsSliders } from "react-icons/bs";
+import DriverToolbarFilters from "./DriverToolbarFilters";
+import DriverToolbarNew from "./DriverToolbarNew";
 import ToolbarButton from "./ToolbarButton";
-import VehicleToolbarFilters from "./VehicleToolbarFilters";
-import VehicleToolbarNew from "./VehicleToolbarNew";
 
 function DriversToolbar({ fetchFilteredData, driversListLen }) {
   const [activeButton, setActiveButton] = useState(null);
@@ -12,13 +12,13 @@ function DriversToolbar({ fetchFilteredData, driversListLen }) {
       name: "filter",
       title: "Filters",
       icon: <BsSliders />,
-      dropdown: <VehicleToolbarFilters fetchFilteredData={fetchFilteredData} />,
+      dropdown: <DriverToolbarFilters fetchFilteredData={fetchFilteredData} />,
     },
     {
       name: "add",
       title: "Add Driver",
       icon: <BsPlusCircle />,
-      dropdown: <VehicleToolbarNew />,
+      dropdown: <DriverToolbarNew />,
     },
   ];
 

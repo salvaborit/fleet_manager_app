@@ -2,7 +2,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { newUserSchema } from "../validations/User";
+import { newVehicleSchema } from "../validations/vehicle";
 
 function EditVehicleModal({ isOpen, toggle, vehicle }) {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
       usage_type: vehicle.usage_type,
       notes: vehicle.notes,
     },
-    validationSchema: newUserSchema,
+    validationSchema: newVehicleSchema,
     onSubmit: onSubmit,
   });
   const usageTypes = [
@@ -62,41 +62,56 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
         <h1 className="text-4xl mb-6 font-bold">Edit vehicle</h1>
         <div className="flex mb-4 space-x-12">
           <div>
-            <p className="text-sm italic mb-1">License</p>
+            <p className="text-sm italic mb-1 ml-1">License</p>
             <input
               type="text"
               name="license_plate"
               value={values.license_plate}
               onChange={handleChange}
               onBlur={handleBlur}
-              className="px-4 py-2 rounded-lg bg-neutral-100
-             focus:border-transparent focus:outline-none"
+              className={`px-4 py-2 rounded-lg bg-neutral-100
+             focus:border-transparent focus:outline-none
+             ${
+               errors.license_plate &&
+               touched.license_plate &&
+               "border-red-500 border-2"
+             }`}
             />
+            {errors.license_plate && touched.license_plate && (
+              <p className="text-xs text-red-500 mt-1 ml-2">
+                {errors.license_plate}
+              </p>
+            )}
           </div>
           <div>
-            <p className="text-sm italic mb-1">Model</p>
+            <p className="text-sm italic mb-1 ml-1">Model</p>
             <input
               type="text"
               name="model"
               value={values.model}
               onChange={handleChange}
               onBlur={handleBlur}
-              className="px-4 py-2 rounded-lg bg-neutral-100
-             focus:border-transparent focus:outline-none"
+              className={`px-4 py-2 rounded-lg bg-neutral-100
+             focus:border-transparent focus:outline-none
+             ${errors.model && touched.model && "border-red-500 border-2"}`}
             />
+            {errors.model && touched.model && (
+              <p className="text-xs text-red-500 mt-1 ml-2">{errors.model}</p>
+            )}
           </div>
         </div>
         <div className="flex space-x-12 mb-4">
           <div>
-            <p className="text-sm italic mb-1">Status</p>
+            <p className="text-sm italic mb-1 ml-1">Status</p>
 
             <select
               name="status"
               value={values.status}
               onChange={handleChange}
               onBlur={handleBlur}
-              className="px-4 py-2 rounded-lg bg-neutral-100
-             focus:border-transparent focus:outline-none hover:bg-neutral-300"
+              className={`px-4 py-2 rounded-lg bg-neutral-100
+             focus:border-transparent focus:outline-none hover:bg-neutral-300
+             ${errors.status && touched.status && "border-red-500 border-2"}`}
             >
               {statuses.map((item) => {
                 return (
@@ -106,38 +121,49 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
                 );
               })}
             </select>
+            {errors.status && touched.status && (
+              <p className="text-xs text-red-500 mt-1 ml-2">{errors.status}</p>
+            )}
           </div>
-          <div>
-            <p className="text-sm italic mb-1">Usage</p>
-            <input
-              type="text"
-              name="usage"
-              value={values.usage}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className="px-4 py-2 rounded-l-lg bg-neutral-100
-             focus:border-transparent focus:outline-none"
-            />
-            <select
-              name="usage_type"
-              value={values.usage_type}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className="px-4 py-2 rounded-r-lg bg-neutral-100
-              hover:bg-neutral-300"
-            >
-              {usageTypes.map((item) => {
-                return (
-                  <option key={item.apiName} value={item.apiName}>
-                    {item.humanName}
-                  </option>
-                );
-              })}
-            </select>
+          <div className="flex-col">
+            <p className="text-sm italic mb-1 ml-1">Usage</p>
+            <div className="flex">
+              <input
+                type="text"
+                name="usage"
+                value={values.usage}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`px-4 py-2 rounded-l-lg bg-neutral-100
+               focus:border-transparent focus:outline-none
+                ${errors.usage && touched.usage && "border-red-500 border-2"}`}
+              />
+              <select
+                name="usage_type"
+                value={values.usage_type}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className="px-4 py-2 rounded-r-lg bg-neutral-100
+                hover:bg-neutral-300"
+              >
+                {usageTypes.map((item) => {
+                  return (
+                    <option key={item.apiName} value={item.apiName}>
+                      {item.humanName}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            {errors.usage && touched.usage && (
+              <p className="text-xs text-red-500 mt-1 mx-2 flex-wrap">
+                {errors.usage}
+              </p>
+            )}
           </div>
         </div>
         <div>
-          <p className="text-sm italic mb-1">Notes</p>
+          <p className="text-sm italic mb-1 ml-1">Notes</p>
           <input
             type="text"
             name="notes"

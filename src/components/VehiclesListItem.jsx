@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   BsInfoCircleFill,
-  BsList,
   BsPencil,
   BsTrashFill,
   BsTruck,

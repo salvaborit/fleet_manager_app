@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const newUserSchema = yup.object().shape({
+export const newVehicleSchema = yup.object().shape({
   license_plate: yup
     .string()
     .max(15, "Less than 15 characters")
@@ -23,7 +23,7 @@ export const newUserSchema = yup.object().shape({
   notes: yup.string(),
 });
 
-export const userFilterSchema = yup.object().shape({
+export const vehicleFilterSchema = yup.object().shape({
   license_plate: yup.string().max(15, "Less than 15 characters"),
   model: yup.string().max(63, "Less than 63 characters"),
   status: yup.string(),
