@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { BsList, BsPencil, BsPerson, BsTrashFill } from "react-icons/bs";
+import {
+  BsInfoCircleFill,
+  BsList,
+  BsPencil,
+  BsPerson,
+  BsTrashFill,
+} from "react-icons/bs";
+import ViewDriverModal from "./ViewDriverModal";
 
 function DriversListItem({ driver }) {
   const [isOpenViewModal, setIsOpenViewModal] = useState(false);
@@ -29,7 +36,12 @@ function DriversListItem({ driver }) {
       <div className="p-8 rounded-full bg-neutral-200">
         <BsPerson size={80} color={"#2a2a2a"} />
       </div>
-      {/* // CONTENT */}
+      <div className="flex flex-col">
+        <h2 className="text-3xl font-bold">
+          {driver.first_name} {driver.last_name}
+        </h2>
+        <h2 className="text-xl text-center">{driver.phone}</h2>
+      </div>
       <div
         className={`pr-12 space-y-1 text-sm px-2 ${
           isHovered ? "visible" : "invisible"
@@ -40,14 +52,14 @@ function DriversListItem({ driver }) {
           className="flex items-center justify-center hover:bg-red-300
          px-4 py-1 space-x-2 rounded-full hover:shadow-sm"
         >
-          <BsList />
-          <p>View</p>
+          <BsInfoCircleFill />
+          <p>Info</p>
         </button>
-        {/* <ViewVehicleModal
+        <ViewDriverModal
           isOpen={isOpenViewModal}
           toggle={toggleViewModal}
-          vehicle={vehicle}
-        /> */}
+          driver={driver}
+        />
         <button
           onClick={toggleEditModal}
           className="flex items-center justify-center hover:bg-red-300
