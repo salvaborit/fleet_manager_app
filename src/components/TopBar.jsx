@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 function TopBar({ isOpenMenu, toggleMenu }) {
   const iconSize = 20;
   return (
-    <div className="z-10 fixed w-full bg-neutral-200 flex items-center justify-between px-5">
+    <div
+      className="z-10 fixed w-full bg-neutral-100 flex items-center
+    justify-between px-5 shadow-md"
+    >
       <div
-        className="rounded-full p-2 text-neutral-600 hover:bg-neutral-300"
+        className="rounded-full p-2 text-neutral-600 hover:bg-neutral-200"
         onClick={toggleMenu}
       >
         {isOpenMenu ? <FiX size={iconSize} /> : <FiMenu size={iconSize} />}
@@ -17,11 +20,12 @@ function TopBar({ isOpenMenu, toggleMenu }) {
         <input
           type="text"
           placeholder="Search"
-          className="z-10 rounded-l-3xl py-2 px-8 h-8 my-2 bg-neutral-300"
+          className="z-10 rounded-l-3xl py-2 px-8 h-8 my-2 bg-neutral-200
+          text-neutral-700"
         />
         <div
-          className="w-12 h-8 rounded-r-full bg-neutral-300
-         hover:bg-neutral-400 hover:text-neutral-50
+          className="w-12 h-8 rounded-r-full bg-neutral-200
+         hover:bg-neutral-300
          flex items-center justify-center"
         >
           <BsSearch />

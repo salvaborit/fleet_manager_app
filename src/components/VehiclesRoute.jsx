@@ -17,20 +17,11 @@ function VehiclesRoute() {
 
   async function fetchFilteredData(queryParams) {
     let queryParamStr = "";
-
     Object.keys(queryParams).map((item) => {
       if (queryParams[item] !== "") {
-        if (item === "status") {
-          // the value is Repair instead of TA
-          // TODO: map to correct value
-        } else if (item === "usage_type") {
-          // the value is Hrs instead of HR
-        }
-
         queryParamStr += `${item}=${queryParams[item]}&`;
       }
     });
-    console.log(queryParamStr);
 
     const resp = await axios.get(
       `http://localhost:8000/vehicles/?${queryParamStr}`
@@ -47,7 +38,13 @@ function VehiclesRoute() {
   return (
     <div className="w-full h-full flex flex-col py-16 px-24">
       <div>
-        <VehiclesToolbar fetchFilteredData={fetchFilteredData} />
+        <VehiclesToolbar
+          fetchFilteredData={fetchFilteredData}
+          vehiclesListLen={vehiclesList.length}
+        />
+        <p className="italic text-sm text-neutral-600 mb-14 mt-2 ml-32">
+          Showing {vehiclesList.length} results
+        </p>
       </div>
       <div className="container self-center">
         {isLoading ? <Loading /> : <VehiclesList vehiclesList={vehiclesList} />}

@@ -75,7 +75,7 @@ function VehicleToolbarNew() {
             value={values.license_plate}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-200
+            className={`px-4 py-1 rounded-lg bg-neutral-100
              text-neutral-800 placeholder:text-neutral-500
              w-40 focus:border-transparent focus:outline-none
              ${
@@ -101,7 +101,7 @@ function VehicleToolbarNew() {
             value={values.model}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-200
+            className={`px-4 py-1 rounded-lg bg-neutral-100
              text-neutral-800 placeholder:text-neutral-500
              focus:border-transparent focus:outline-none
              ${errors.model && touched.model && "border-red-500 border-2"}`}
@@ -123,7 +123,7 @@ function VehicleToolbarNew() {
             value={values.status}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-6 py-2 rounded-lg bg-neutral-200
+            className={`px-6 py-2 rounded-lg bg-neutral-100
              text-neutral-800 hover:bg-neutral-300
              ${errors.status && touched.status && "border-red-500 border-2"}`}
           >
@@ -152,7 +152,7 @@ function VehicleToolbarNew() {
               value={values.usage}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-1 rounded-l-lg bg-neutral-200
+              className={`px-4 py-1 rounded-l-lg bg-neutral-100
                  text-neutral-800 placeholder:text-neutral-500
                  w-48 focus:border-transparent focus:outline-none
                  ${errors.usage && touched.usage && "border-red-500 border-2"}`}
@@ -163,7 +163,7 @@ function VehicleToolbarNew() {
               value={values.usage_type}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-6 py-1 rounded-r-lg bg-neutral-200
+              className={`px-6 py-1 rounded-r-lg bg-neutral-100
              text-neutral-800 hover:bg-neutral-300 border-l-2 border-neutral-300
              ${
                errors.usage_type &&
@@ -214,7 +214,7 @@ function VehicleToolbarNew() {
               value={values.notes}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-1 w-full rounded-lg bg-neutral-200
+              className={`px-4 py-1 w-full rounded-lg bg-neutral-100
                text-neutral-800 placeholder:text-neutral-500
                focus:border-transparent focus:outline-none
                ${errors.notes && touched.notes && "border-red-500 border-2"}`}

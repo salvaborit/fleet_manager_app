@@ -7,7 +7,6 @@ import Login from "./components/Login";
 import NavBar from "./components/NavBar";
 import VehiclesRoute from "./components/VehiclesRoute";
 import DriversRoute from "./components/DriversRoute";
-import DocumentationsRoute from "./components/DocumentationsRoute";
 import SettingsRoute from "./components/SettingsRoute";
 import HelpRoute from "./components/HelpRoute";
 import HomeRoute from "./components/HomeRoute";
@@ -48,20 +47,6 @@ function App() {
       children: [],
     },
     {
-      path: "/documentations",
-      element: <DocumentationsRoute />,
-      children: [
-        {
-          path: "/documentations/vehicles",
-          element: "",
-        },
-        {
-          path: "/documentations/drivers",
-          element: "",
-        },
-      ],
-    },
-    {
       path: "/settings",
       element: <SettingsRoute />,
       children: [],
@@ -86,7 +71,7 @@ function App() {
   return (
     <div
       className="w-full h-full
-                 bg-neutral-100"
+                 bg-neutral-50"
     >
       <TopBar isOpenMenu={isOpenMenu} toggleMenu={toggleMenu} />
       <div className="w-full h-full">

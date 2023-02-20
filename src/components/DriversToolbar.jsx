@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-
 import { BsPlusCircle, BsSliders } from "react-icons/bs";
-
 import ToolbarButton from "./ToolbarButton";
 import VehicleToolbarFilters from "./VehicleToolbarFilters";
 import VehicleToolbarNew from "./VehicleToolbarNew";
 
-function VehiclesToolbar({ fetchFilteredData, vehiclesListLen }) {
+function DriversToolbar({ fetchFilteredData, driversListLen }) {
   const [activeButton, setActiveButton] = useState(null);
 
   const buttons = [
@@ -18,7 +16,7 @@ function VehiclesToolbar({ fetchFilteredData, vehiclesListLen }) {
     },
     {
       name: "add",
-      title: "Add Vehicle",
+      title: "Add Driver",
       icon: <BsPlusCircle />,
       dropdown: <VehicleToolbarNew />,
     },
@@ -39,7 +37,7 @@ function VehiclesToolbar({ fetchFilteredData, vehiclesListLen }) {
   return (
     <div className="flex flex-col mt-2 px-32 border-neutral-400 border-b-2 pb-3">
       <div className="w-full flex items-end space-x-2">
-        <h1 className="text-5xl mr-16 mb-1 font-bold">Vehicles</h1>
+        <h1 className="text-5xl mr-16 mb-1 font-bold">Drivers</h1>
         <div className="flex space-x-2">
           {buttons.map((btn) => {
             return (
@@ -58,4 +56,4 @@ function VehiclesToolbar({ fetchFilteredData, vehiclesListLen }) {
   );
 }
 
-export default VehiclesToolbar;
+export default DriversToolbar;

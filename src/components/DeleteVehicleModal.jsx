@@ -44,7 +44,7 @@ function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
     ${isOpen ? "visible" : "invisible"}`}
     >
       <div
-        className="bg-neutral-100 border-2 px-16 py-10 rounded-xl
+        className="bg-neutral-50 border-2 px-16 py-10 rounded-xl
        border-neutral-600 flex flex-col"
       >
         <h1 className="text-4xl mb-6 font-bold">Are you sure?</h1>
@@ -52,7 +52,7 @@ function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
         <p className="text-lg mb-10">The following vehicle will be deleted:</p>
         <div
           className="flex justify-center items-center space-x-10
-        rounded-full bg-neutral-200 self-center pr-6 shadow-lg"
+        rounded-full bg-neutral-100 self-center pr-6 shadow-lg"
         >
           <div className=" relative p-4 rounded-full bg-neutral-300">
             <BsTruck size={40} />
@@ -83,12 +83,12 @@ function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
             onClick={handleDelete}
             className="mr-4 px-4 py-2 rounded-xl font-bold
            bg-red-500 text-neutral-50 border-2 border-transparent
-            hover:bg-neutral-100 hover:text-red-500 hover:border-2 hover:border-red-500"
+            hover:bg-neutral-50 hover:text-red-500 hover:border-2 hover:border-red-500"
           >
             Delete
           </button>
           <button
-            className="mr-4 px-4 py-2 rounded-xl bg-neutral-200"
+            className="mr-4 px-4 py-2 rounded-xl bg-neutral-100"
             onClick={toggle}
           >
             Cancel

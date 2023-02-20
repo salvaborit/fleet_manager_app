@@ -9,7 +9,7 @@ function NavItem({ name, icon, route }) {
       <li
         className={`flex flex-col items-center justify-center
     rounded-lg p-3 text-neutral-600 hover:bg-red-200 relative
-    ${location.pathname.split("/")[1] === name && "bg-red-300"}`}
+    ${location.pathname.split("/")[1] === name && "bg-red-300 shadow-md"}`}
       >
         {icon}
         <p className="text-xs mt-1">

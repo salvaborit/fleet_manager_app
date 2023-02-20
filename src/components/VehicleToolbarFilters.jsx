@@ -65,7 +65,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             value={values.license_plate}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-200
+            className={`px-4 py-1 rounded-lg bg-neutral-100
              text-neutral-800 placeholder:text-neutral-500
              w-40 focus:border-transparent focus:outline-none
              ${
@@ -94,7 +94,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             value={values.model}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-200
+            className={`px-4 py-1 rounded-lg bg-neutral-100
              text-neutral-800 placeholder:text-neutral-500
              focus:border-transparent focus:outline-none
              ${errors.model && touched.model && "border-red-500 border-2"}`}
@@ -116,7 +116,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             value={values.status}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-6 py-2 rounded-lg bg-neutral-200
+            className={`px-6 py-2 rounded-lg bg-neutral-100
              text-neutral-800 hover:bg-neutral-300
              ${errors.status && touched.status && "border-red-500 border-2"}`}
           >
@@ -147,7 +147,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
               value={values.min_usage}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-1 rounded-lg bg-neutral-200
+              className={`px-4 py-1 rounded-lg bg-neutral-100
                text-neutral-800 placeholder:text-neutral-500
                w-48 focus:border-transparent focus:outline-none
                ${
@@ -164,7 +164,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
               value={values.max_usage}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-1 rounded-lg bg-neutral-200
+              className={`px-4 py-1 rounded-lg bg-neutral-100
                text-neutral-800 placeholder:text-neutral-500
                w-48 focus:border-transparent focus:outline-none
                ${
@@ -180,7 +180,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             value={values.usage_type}
             onChange={handleChange}
             onBlur={handleBlur}
-            className="px-6 py-1 rounded-lg bg-neutral-200
+            className="px-6 py-1 rounded-lg bg-neutral-100
            text-neutral-800 hover:bg-neutral-300"
           >
             <option value="">--</option>

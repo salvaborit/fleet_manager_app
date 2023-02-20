@@ -3,7 +3,7 @@ import React from "react";
 function Login() {
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="flex flex-col bg-neutral-200 rounded-2xl p-4">
+      <div className="flex flex-col bg-neutral-100 rounded-2xl p-4">
         <input
           type="text"
           placeholder="Username"

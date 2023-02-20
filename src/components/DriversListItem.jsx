@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { BsList, BsPencil, BsTrashFill, BsTruck } from "react-icons/bs";
-import DeleteVehicleModal from "./DeleteVehicleModal";
-import EditVehicleModal from "./EditVehicleModal";
-import ViewVehicleModal from "./ViewVehicleModal";
+import { BsList, BsPencil, BsPerson, BsTrashFill } from "react-icons/bs";
 
-function VehiclesListItem({ vehicle }) {
+function DriversListItem({ driver }) {
   const [isOpenViewModal, setIsOpenViewModal] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+
+  const [isHovered, setIsHovered] = useState(false);
 
   function toggleViewModal() {
     setIsOpenViewModal(!isOpenViewModal);
@@ -20,30 +19,6 @@ function VehiclesListItem({ vehicle }) {
   function toggleDeleteModal() {
     setIsOpenDeleteModal(!isOpenDeleteModal);
   }
-
-  const STATUSES = {
-    AC: "ACTIVE",
-    MA: "MAINTENANCE",
-    TA: "REPAIRS",
-    IN: "INACTIVE",
-  };
-
-  function renderStatusColorCode() {
-    const statusName = STATUSES[vehicle.status];
-    let color = "";
-    if (statusName === "ACTIVE") {
-      color = "bg-green-500";
-    } else if (statusName === "MAINTENANCE" || statusName === "REPAIRS") {
-      color = "bg-yellow-500";
-    } else {
-      color = "bg-red-500";
-    }
-
-    return <div className={`${color} w-3 h-3 rounded-full`}></div>;
-  }
-
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <div
       className="flex items-center space-x-20 rounded-full
@@ -52,24 +27,9 @@ function VehiclesListItem({ vehicle }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="p-8 rounded-full bg-neutral-200">
-        <BsTruck size={80} color={"#2a2a2a"} />
+        <BsPerson size={80} color={"#2a2a2a"} />
       </div>
-      <div className="flex flex-col w-1/3">
-        <h1 className="text-3xl font-bold">{vehicle.model}</h1>
-        <h2 className="text-xl">{vehicle.license_plate}</h2>
-      </div>
-      <div>
-        <h3 className="text-md flex justify-center items-center w-max">
-          <b>Status: &nbsp;</b> {STATUSES[vehicle.status]}
-          <div className="m-0 ml-4">{renderStatusColorCode()}</div>
-        </h3>
-        <h3 className="text-md w-max">
-          <b>Usage:</b>{" "}
-          {`${vehicle.usage.toLocaleString("en-us")} ${
-            vehicle.usage_type === "HR" ? "hs" : "kms"
-          }`}
-        </h3>
-      </div>
+      {/* // CONTENT */}
       <div
         className={`pr-12 space-y-1 text-sm px-2 ${
           isHovered ? "visible" : "invisible"
@@ -83,11 +43,11 @@ function VehiclesListItem({ vehicle }) {
           <BsList />
           <p>View</p>
         </button>
-        <ViewVehicleModal
+        {/* <ViewVehicleModal
           isOpen={isOpenViewModal}
           toggle={toggleViewModal}
           vehicle={vehicle}
-        />
+        /> */}
         <button
           onClick={toggleEditModal}
           className="flex items-center justify-center hover:bg-red-300
@@ -96,11 +56,11 @@ function VehiclesListItem({ vehicle }) {
           <BsPencil />
           <p>Edit</p>
         </button>
-        <EditVehicleModal
+        {/* <EditVehicleModal
           isOpen={isOpenEditModal}
           toggle={toggleEditModal}
           vehicle={vehicle}
-        />
+        /> */}
         <button
           onClick={toggleDeleteModal}
           className="flex items-center justify-center hover:bg-red-300
@@ -109,14 +69,14 @@ function VehiclesListItem({ vehicle }) {
           <BsTrashFill />
           <p>Delete</p>
         </button>
-        <DeleteVehicleModal
+        {/* <DeleteVehicleModal
           isOpen={isOpenDeleteModal}
           toggle={toggleDeleteModal}
           vehicle={vehicle}
-        />
+        /> */}
       </div>
     </div>
   );
 }
 
-export default VehiclesListItem;
+export default DriversListItem;

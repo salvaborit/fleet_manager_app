@@ -2,7 +2,6 @@ import React from "react";
 import {
   BsTruck,
   BsPeople,
-  BsFileEarmarkText,
   BsGear,
   BsArrowBarLeft,
   BsListUl,
@@ -48,23 +47,6 @@ function NavBar({ isOpenMenu }) {
         },
       ],
     },
-    {
-      name: "docs",
-      route: "/docs",
-      icon: <BsFileEarmarkText size={navIconSize} />,
-      actions: [
-        {
-          title: "Vehicles",
-          icon: <BsTruck />,
-          route: "/docs/vehicles",
-        },
-        {
-          title: "Drivers",
-          icon: <BsPeople />,
-          route: "/docs/drivers",
-        },
-      ],
-    },
   ];
   const secNavItems = [
     {
@@ -82,7 +64,7 @@ function NavBar({ isOpenMenu }) {
   return (
     <nav
       className="fixed flex flex-col justify-between items-center self-center
-                 h-full bg-neutral-200 pb-4 pt-14"
+                 h-full bg-neutral-100 pb-4 pt-20 shadow-lg"
     >
       <ul className="flex flex-col space-y-4 rounded-xl">
         {primNavItems.map((item) => {
