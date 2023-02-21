@@ -5,7 +5,7 @@ import VehiclesListItem from "./VehiclesListItem";
 function VehiclesList({ vehiclesList }) {
   return (
     <table
-      className="flex flex-col
+      className="flex flex-col items-center justify-center
     overflow-y-auto"
     >
       {vehiclesList.map((vehicle) => {
