@@ -13,8 +13,16 @@ export const newDriverSchema = yup.object().shape({
     .string()
     .max(255, "Less than 255 characters")
     .required("Required"),
-  email: yup.string().max(127, "Less than 127 characters").required("Required"),
-  phone: yup.string().max(31, "Less than 31 characters").required("Required"),
+  email: yup
+    .string()
+    .email("Must be an email address")
+    .max(127, "Less than 127 characters")
+    .required("Required"),
+  phone: yup
+    .number()
+    .max(31, "Less than 31 characters")
+    .typeError("Must be a number")
+    .required("Required"),
   birthdate: yup.date().required("Required"),
   id_type: yup
     .string()

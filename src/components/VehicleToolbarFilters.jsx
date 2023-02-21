@@ -194,7 +194,9 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
           </select>
           <button
             type="submit"
-            className="absolute bottom-0 right-0 py-4 px-4 rounded-full bg-red-300 hover:bg-red-400"
+            className="absolute bottom-0 right-0 py-4 px-4 rounded-full
+             bg-blue-300 border-2 border-blue-300
+              hover:bg-neutral-50 shadow-md"
           >
             <BsSearch />
           </button>

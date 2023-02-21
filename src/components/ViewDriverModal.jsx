@@ -3,7 +3,7 @@ import React from "react";
 function ViewDriverModal({ isOpen, toggle, driver }) {
   return (
     <div
-      className={`z-20 w-screen h-screen left-0 top-0 absolute
+      className={`z-20 w-screen h-screen left-0 top-0 fixed
     flex flex-col justify-center items-center bg-neutral-600/50
     ${isOpen ? "visible" : "invisible"}`}
     >

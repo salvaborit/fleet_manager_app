@@ -4,12 +4,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { newVehicleSchema } from "../validations/vehicle";
 
-function EditVehicleModal({ isOpen, toggle, vehicle }) {
+function NewVehicleModal({ isOpen, toggle }) {
   const navigate = useNavigate();
 
   function onSubmit(values, actions) {
     axios
-      .put(`http://localhost:8000/vehicles/${vehicle.id}/`, values)
+      .post(`http://localhost:8000/vehicles/`, values)
       .then((resp) => {
         actions.resetForm();
         navigate(0);
@@ -27,12 +27,12 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
     isSubmitting,
   } = useFormik({
     initialValues: {
-      license_plate: vehicle.license_plate,
-      model: vehicle.model,
-      status: vehicle.status,
-      usage: vehicle.usage,
-      usage_type: vehicle.usage_type,
-      notes: vehicle.notes,
+      license_plate: "",
+      model: "",
+      status: "",
+      usage: "",
+      usage_type: "",
+      notes: "",
     },
     validationSchema: newVehicleSchema,
     onSubmit: onSubmit,
@@ -59,7 +59,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
         className="bg-neutral-50 border-2 px-16 py-10 rounded-xl
        border-neutral-600 flex flex-col"
       >
-        <h1 className="text-4xl mb-6 font-bold">Edit vehicle</h1>
+        <h1 className="text-4xl mb-6 font-bold">New vehicle</h1>
         <div className="flex mb-4 space-x-12">
           <div>
             <p className="text-sm italic mb-1 ml-1">License</p>
@@ -113,6 +113,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
              focus:border-transparent focus:outline-none hover:bg-neutral-300
              ${errors.status && touched.status && "border-red-500 border-2"}`}
             >
+              <option value="">Select a status</option>
               {statuses.map((item) => {
                 return (
                   <option key={item.apiName} value={item.apiName}>
@@ -146,6 +147,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
                 className="px-4 py-2 rounded-r-lg bg-neutral-100
                 hover:bg-neutral-300"
               >
+                <option value="">--</option>
                 {usageTypes.map((item) => {
                   return (
                     <option key={item.apiName} value={item.apiName}>
@@ -181,12 +183,15 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
         >
           <button
             type="submit"
-            className="mr-4 px-4 py-2 rounded-xl bg-neutral-100"
+            className="mr-4 px-4 py-2 rounded-xl bg-blue-400 text-neutral-50
+            border-2 border-blue-400 hover:text-blue-400
+            hover:bg-neutral-50"
           >
-            Modify
+            Create vehicle
           </button>
           <button
-            className="mr-4 px-4 py-2 rounded-xl bg-neutral-100"
+            className="mr-4 px-4 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-50
+            border-2 border-neutral-200"
             onClick={(e) => {
               e.preventDefault();
               toggle();
@@ -200,4 +205,4 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
   );
 }
 
-export default EditVehicleModal;
+export default NewVehicleModal;

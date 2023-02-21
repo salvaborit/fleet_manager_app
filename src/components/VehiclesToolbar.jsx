@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
-import { BsPlusCircle, BsSliders } from "react-icons/bs";
+import { BsPlusSquare, BsSliders } from "react-icons/bs";
+import NewVehicleModal from "./NewVehicleModal";
 
 import ToolbarButton from "./ToolbarButton";
 import VehicleToolbarFilters from "./VehicleToolbarFilters";
-import VehicleToolbarNew from "./VehicleToolbarNew";
 
-function VehiclesToolbar({ fetchFilteredData, vehiclesListLen }) {
+function VehiclesToolbar({ fetchFilteredData }) {
   const [activeButton, setActiveButton] = useState(null);
+  const [isOpenNewModal, setIsOpenNewModal] = useState(false);
 
   const buttons = [
     {
@@ -15,12 +16,6 @@ function VehiclesToolbar({ fetchFilteredData, vehiclesListLen }) {
       title: "Filters",
       icon: <BsSliders />,
       dropdown: <VehicleToolbarFilters fetchFilteredData={fetchFilteredData} />,
-    },
-    {
-      name: "add",
-      title: "Add Vehicle",
-      icon: <BsPlusCircle />,
-      dropdown: <VehicleToolbarNew />,
     },
   ];
 
@@ -36,22 +31,34 @@ function VehiclesToolbar({ fetchFilteredData, vehiclesListLen }) {
     }
   }
 
+  function toggleNewModal() {
+    setIsOpenNewModal(!isOpenNewModal);
+  }
+
   return (
-    <div className="flex flex-col mt-2 px-32 border-neutral-400 border-b-2 pb-3">
-      <div className="w-full flex items-end space-x-2">
-        <h1 className="text-5xl mr-16 mb-1 font-bold">Vehicles</h1>
-        <div className="flex space-x-2">
-          {buttons.map((btn) => {
-            return (
-              <ToolbarButton
-                key={btn.name}
-                btn={btn}
-                toggleDropdown={toggleDropdown}
-                activeButton={activeButton}
-              />
-            );
-          })}
-        </div>
+    <div className="flex flex-col my-4 mx-4">
+      <div className="flex justify-bet">
+        {buttons.map((btn) => {
+          return (
+            <ToolbarButton
+              key={btn.name}
+              btn={btn}
+              toggleDropdown={toggleDropdown}
+              activeButton={activeButton}
+            />
+          );
+        })}
+        <button
+          type="submit"
+          onClick={toggleNewModal}
+          className="absolute right-20 flex items-center justify-center
+          py-1 px-4 rounded-lg space-x-3 shadow-md
+          bg-blue-400 text-neutral-50
+          hover:bg-blue-500"
+        >
+          <BsPlusSquare /> <p>Add</p>
+        </button>
+        <NewVehicleModal isOpen={isOpenNewModal} toggle={toggleNewModal} />
       </div>
       {activeButton && activeButton.dropdown}
     </div>

@@ -1,20 +1,21 @@
 import React from "react";
 import { BsQuestion, BsSearch } from "react-icons/bs";
-import { FiMenu, FiX, FiUser } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
+import { TbManualGearbox } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
-function TopBar({ isOpenMenu, toggleMenu }) {
+function NewTopBar() {
   const iconSize = 20;
   return (
     <div
       className="z-20 w-full bg-neutral-50 flex items-center
     justify-between px-5"
     >
-      <div
-        className="rounded-full p-2 text-neutral-600 hover:bg-neutral-200"
-        onClick={toggleMenu}
-      >
-        {isOpenMenu ? <FiX size={iconSize} /> : <FiMenu size={iconSize} />}
+      <div className="flex items-center justify-center">
+        <div className="rotate-45 font-bold text-blue-400 mr-2 mt-1">
+          <TbManualGearbox />
+        </div>
+        <div className="font-bold text-neutral-500">fleet manager</div>
       </div>
       <div className="flex items-center justify-center">
         <input
@@ -46,4 +47,4 @@ function TopBar({ isOpenMenu, toggleMenu }) {
   );
 }
 
-export default TopBar;
+export default NewTopBar;

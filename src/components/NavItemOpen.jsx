@@ -27,7 +27,7 @@ function NavItemOpen({ name, icon, route, actions }) {
                 <li
                   className={`flex space-x-4 mx-8 ml-6 px-2 py-1 text-sm
                 items-center mb-1 hover:bg-neutral-300 rounded-lg
-                ${location.pathname === action.route && "bg-red-300"}`}
+                ${location.pathname === action.route && "bg-blue-300"}`}
                 >
                   <div>{action.icon}</div>
                   <div>{action.title}</div>

@@ -16,6 +16,8 @@ function VehiclesListItem({ vehicle }) {
 
   const [isHovered, setIsHovered] = useState(false);
 
+  const iconSize = 20;
+
   function toggleViewModal() {
     setIsOpenViewModal(!isOpenViewModal);
   }
@@ -30,63 +32,66 @@ function VehiclesListItem({ vehicle }) {
 
   const STATUSES = {
     AC: "ACTIVE",
-    MA: "MAINTENANCE",
+    MA: "MAINT.",
     TA: "REPAIRS",
     IN: "INACTIVE",
   };
 
-  function renderStatusColorCode() {
+  function renderStatus() {
     const statusName = STATUSES[vehicle.status];
-    let color = "";
-    if (statusName === "ACTIVE") {
-      color = "bg-green-500";
-    } else if (statusName === "MAINTENANCE" || statusName === "REPAIRS") {
-      color = "bg-yellow-500";
+    let styles = "";
+    if (statusName === STATUSES["AC"]) {
+      styles = "bg-green-200 border-green-400 text-green-800";
+    } else if (statusName === STATUSES["MA"] || statusName === STATUSES["TA"]) {
+      styles = "bg-yellow-200 border-yellow-400 text-yellow-800";
     } else {
-      color = "bg-red-500";
+      styles = "bg-red-200 border-red-400 text-red-800";
     }
 
-    return <div className={`${color} w-3 h-3 rounded-full`}></div>;
+    return (
+      <td className={`${styles} font-bold rounded-lg border-2 px-2 text-sm`}>
+        {statusName}
+      </td>
+    );
   }
 
+  const styles = { width: "10%" };
+
   return (
-    <div
-      className="flex items-center space-x-20 rounded-full
-       bg-neutral-100 justify-between shadow-md w-2/3 text-neutral-900"
+    <tr
+      className="flex items-center justify-between
+       bg-neutral-100 w-full text-neutral-900"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="p-8 rounded-full bg-neutral-200">
-        <BsTruck size={80} color={"#2a2a2a"} />
-      </div>
-      <div className="flex flex-col w-1/3">
-        <h2 className="text-3xl font-bold">{vehicle.model}</h2>
-        <h3 className="text-xl">{vehicle.license_plate}</h3>
-      </div>
-      <div>
-        <h4 className="text-md flex justify-center items-center w-max">
-          <b>Status: &nbsp;</b> {STATUSES[vehicle.status]}
-          <div className="m-0 ml-4">{renderStatusColorCode()}</div>
-        </h4>
-        <h4 className="text-md w-max">
-          <b>Usage:</b>{" "}
-          {`${vehicle.usage.toLocaleString("en-us")} ${
-            vehicle.usage_type === "HR" ? "hs" : "kms"
-          }`}
-        </h4>
-      </div>
-      <div
-        className={`pr-12 space-y-1 text-sm px-2 ${
+      <td className="flex flex-col ml-10 w-1/12 font-bold">
+        <p>{vehicle.license_plate}</p>
+      </td>
+      <td className="flex flex-col w-3/12">
+        <p>{vehicle.model}</p>
+      </td>
+      <td className=" w-1/12">
+        {`${vehicle.usage.toLocaleString("en-us")} ${
+          vehicle.usage_type === "HR" ? "hs" : "kms"
+        }`}
+      </td>
+      <td
+        className="text-md flex justify-center items-center
+        w-1/12"
+      >
+        {renderStatus()}
+      </td>
+      <td
+        className={`flex text-sm space-x-2 mr-10 ${
           isHovered ? "visible" : "invisible"
         }`}
       >
         <button
           onClick={toggleViewModal}
-          className="flex items-center justify-center hover:bg-red-300
-         px-4 py-1 space-x-2 rounded-full hover:shadow-sm"
+          className="flex items-center justify-center hover:bg-blue-300
+         px-2 py-2 space-x-2 rounded-lg hover:shadow-sm"
         >
-          <BsInfoCircleFill />
-          <p>Info</p>
+          <BsInfoCircleFill size={iconSize} />
         </button>
         <ViewVehicleModal
           isOpen={isOpenViewModal}
@@ -95,11 +100,10 @@ function VehiclesListItem({ vehicle }) {
         />
         <button
           onClick={toggleEditModal}
-          className="flex items-center justify-center hover:bg-red-300
-         px-4 py-1 space-x-2 rounded-full hover:shadow-sm"
+          className="flex items-center justify-center hover:bg-blue-300
+         px-2 py-1 space-x-2 rounded-lg hover:shadow-sm"
         >
-          <BsPencil />
-          <p>Edit</p>
+          <BsPencil size={iconSize} />
         </button>
         <EditVehicleModal
           isOpen={isOpenEditModal}
@@ -108,19 +112,18 @@ function VehiclesListItem({ vehicle }) {
         />
         <button
           onClick={toggleDeleteModal}
-          className="flex items-center justify-center hover:bg-red-300
-         px-4 py-1 space-x-2 rounded-full hover:shadow-sm"
+          className="flex items-center justify-center hover:bg-blue-300
+         px-2 py-1 space-x-2 rounded-lg hover:shadow-sm"
         >
-          <BsTrashFill />
-          <p>Delete</p>
+          <BsTrashFill size={iconSize} />
         </button>
         <DeleteVehicleModal
           isOpen={isOpenDeleteModal}
           toggle={toggleDeleteModal}
           vehicle={vehicle}
         />
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }
 

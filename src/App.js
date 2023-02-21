@@ -12,6 +12,8 @@ import HelpRoute from "./components/HelpRoute";
 import HomeRoute from "./components/HomeRoute";
 import TopBar from "./components/TopBar";
 import VehicleToolbarFilters from "./components/VehicleToolbarFilters";
+import NewNavBar from "./components/NewNavBar";
+import NewTopBar from "./components/NewTopBar";
 
 function App() {
   const routes = useRoutes([
@@ -70,13 +72,13 @@ function App() {
 
   return (
     <div
-      className="w-full h-full
+      className="fixed flex flex-col w-full h-full
                  bg-neutral-50"
     >
-      <TopBar isOpenMenu={isOpenMenu} toggleMenu={toggleMenu} />
-      <div className="w-full h-full">
-        <NavBar isOpenMenu={isOpenMenu} />
-        <div className="pl-20">{routes}</div>
+      <NewTopBar />
+      <div className="flex h-full w-full">
+        <NewNavBar isOpenMenu={isOpenMenu} />
+        <div className="w-full h-full bg-neutral-50 pl-10 pr-14">{routes}</div>
       </div>
     </div>
   );
