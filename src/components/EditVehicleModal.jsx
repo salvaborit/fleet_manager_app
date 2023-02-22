@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import React from "react";
+import { CgSpinner } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { newVehicleSchema } from "../validations/vehicle";
 import Loading from "./Loading";
