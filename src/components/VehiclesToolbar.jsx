@@ -10,6 +10,7 @@ function VehiclesToolbar({
   fetchFilteredData,
   vehiclesListLen,
   totalVehicleCount,
+  isLoading,
 }) {
   const [activeButton, setActiveButton] = useState(null);
   const [isOpenNewModal, setIsOpenNewModal] = useState(false);
@@ -26,9 +27,7 @@ function VehiclesToolbar({
       dropdown: (
         <VehicleToolbarFilters
           fetchFilteredData={fetchFilteredData}
-          vehiclesListLen={vehiclesListLen}
-          totalVehicleCount={totalVehicleCount}
-          isOpen={true}
+          isLoading={isLoading}
         />
       ),
     },

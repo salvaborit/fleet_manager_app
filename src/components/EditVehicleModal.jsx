@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { newVehicleSchema } from "../validations/vehicle";
+import Loading from "./Loading";
 
 function EditVehicleModal({ isOpen, toggle, vehicle }) {
   const navigate = useNavigate();
@@ -231,6 +232,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
           </button>
         </div>
       </form>
+      {isSubmitting && <Loading />}
     </div>
   );
 }

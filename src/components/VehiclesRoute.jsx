@@ -10,8 +10,10 @@ function VehiclesRoute({ isOpenNew }) {
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchData() {
+    setIsLoading(true);
     const resp = await axios.get("http://localhost:8000/vehicles/");
     setVehiclesList(resp.data);
+    setIsLoading(false);
   }
 
   async function fetchFilteredData(queryParams) {
@@ -22,15 +24,16 @@ function VehiclesRoute({ isOpenNew }) {
       }
     }
 
+    setIsLoading(true);
     const resp = await axios.get(
       `http://localhost:8000/vehicles/?${queryParamStr}`
     );
     setVehiclesList(resp.data);
+    setIsLoading(false);
   }
 
   useEffect(() => {
     fetchData();
-    setIsLoading(false);
   }, []);
 
   return (
@@ -43,17 +46,17 @@ function VehiclesRoute({ isOpenNew }) {
 
         <div className="flex flex-col bg-neutral-50 rounded-2xl shadow-lg">
           <div>
-            <VehiclesToolbar fetchFilteredData={fetchFilteredData} />
+            <VehiclesToolbar
+              fetchFilteredData={fetchFilteredData}
+              isLoading={isLoading}
+            />
           </div>
           <div className="container self-center pb-8">
-            {isLoading ? (
-              <Loading />
-            ) : (
-              <VehiclesList vehiclesList={vehiclesList} />
-            )}
+            {!isLoading && <VehiclesList vehiclesList={vehiclesList} />}
           </div>
         </div>
       </div>
+      {isLoading && <Loading />}
     </>
   );
 }
