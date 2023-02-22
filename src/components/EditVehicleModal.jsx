@@ -58,8 +58,8 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
     >
       <form
         onSubmit={handleSubmit}
-        className="bg-neutral-50 border-2 px-16 py-10 rounded-xl text-neutral-700
-       border-neutral-500 flex flex-col"
+        className="bg-neutral-50 border-2 px-16 py-10 rounded-xl
+       border-neutral-500 flex flex-col text-neutral-700"
       >
         <h1 className="text-4xl mb-6 font-bold">Edit vehicle</h1>
         <div className="flex mb-4 space-x-12">
@@ -73,7 +73,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
               value={values.license_plate}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-2 rounded-lg bg-neutral-2s00
+              className={`px-4 py-2 rounded-lg bg-neutral-200
               ${
                 errors.license_plate &&
                 touched.license_plate &&
@@ -98,7 +98,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
               value={values.model}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-2 rounded-lg bg-neutral-2s00
+              className={`px-4 py-2 rounded-lg bg-neutral-200
              ${
                errors.model &&
                touched.model &&
@@ -123,7 +123,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
               value={values.status}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-2 rounded-lg bg-neutral-2s00 hover:bg-neutral-300
+              className={`px-4 py-2 rounded-lg bg-neutral-200 hover:bg-neutral-300
              ${
                errors.status &&
                touched.status &&
@@ -154,7 +154,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
                 value={values.usage}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`px-4 py-2 rounded-l-lg bg-neutral-2s00
+                className={`px-4 py-2 rounded-l-lg bg-neutral-200 z-10
                 ${
                   errors.usage &&
                   touched.usage &&
@@ -168,7 +168,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
                 value={values.usage_type}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`px-4 py-2 rounded-r-lg bg-neutral-2s00
+                className={`px-4 py-2 rounded-r-lg bg-neutral-200
                 hover:bg-neutral-300
                 ${
                   errors.usage_type &&
@@ -204,7 +204,7 @@ function EditVehicleModal({ isOpen, toggle, vehicle }) {
             value={values.notes}
             onChange={handleChange}
             onBlur={handleBlur}
-            className="px-4 py-2 w-full rounded-lg bg-neutral-2s00"
+            className="px-4 py-2 w-full rounded-lg bg-neutral-200"
             placeholder="Check tyre pressure, broken fender"
           />
         </div>
