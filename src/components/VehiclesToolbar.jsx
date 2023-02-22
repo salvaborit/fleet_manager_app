@@ -6,12 +6,7 @@ import NewVehicleModal from "./NewVehicleModal";
 import ToolbarButton from "./ToolbarButton";
 import VehicleToolbarFilters from "./VehicleToolbarFilters";
 
-function VehiclesToolbar({
-  fetchFilteredData,
-  vehiclesListLen,
-  totalVehicleCount,
-  isLoading,
-}) {
+function VehiclesToolbar({ fetchFilteredData, isLoading }) {
   const [activeButton, setActiveButton] = useState(null);
   const [isOpenNewModal, setIsOpenNewModal] = useState(false);
 

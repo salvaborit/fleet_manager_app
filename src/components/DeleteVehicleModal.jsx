@@ -1,10 +1,12 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { TbTruck } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const STATUSES = {
     AC: "ACTIVE",
@@ -14,12 +16,17 @@ function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
   };
 
   function handleDelete() {
+    setIsLoading(true);
     axios
       .delete(`http://localhost:8000/vehicles/${vehicle.id}/`)
       .then((resp) => {
+        setIsLoading(false);
         navigate(0);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setIsLoading(false);
+      });
   }
 
   function renderStatusColorCode() {
@@ -96,6 +103,7 @@ function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
           </button>
         </div>
       </div>
+      {isLoading && <Loading />}
     </div>
   );
 }
