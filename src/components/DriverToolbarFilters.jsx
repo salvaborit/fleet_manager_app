@@ -34,7 +34,7 @@ function DriverToolbarFilters({ fetchFilteredData }) {
 
   const idTypes = [
     { apiName: "CI", humanName: "CI" },
-    { apiName: "PA", humanName: "Passport" },
+    { apiName: "PA", humanName: "PP" },
   ];
   return (
     <form

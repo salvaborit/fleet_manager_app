@@ -1,24 +1,28 @@
 import React, { useState } from "react";
-import { BsPlusCircle, BsSliders } from "react-icons/bs";
+import { BsFilterCircleFill, BsPlusCircleFill } from "react-icons/bs";
 import DriverToolbarFilters from "./DriverToolbarFilters";
-import DriverToolbarNew from "./DriverToolbarNew";
+import NewDriverModal from "./NewDriverModal";
 import ToolbarButton from "./ToolbarButton";
 
-function DriversToolbar({ fetchFilteredData, driversListLen }) {
+function DriversToolbar({ fetchFilteredData, isLoading }) {
   const [activeButton, setActiveButton] = useState(null);
+  const [isOpenNewModal, setIsOpenNewModal] = useState(false);
+
+  function toggleNewModal() {
+    setIsOpenNewModal(!isOpenNewModal);
+  }
 
   const buttons = [
     {
       name: "filter",
       title: "Filters",
-      icon: <BsSliders />,
-      dropdown: <DriverToolbarFilters fetchFilteredData={fetchFilteredData} />,
-    },
-    {
-      name: "add",
-      title: "Add Driver",
-      icon: <BsPlusCircle />,
-      dropdown: <DriverToolbarNew />,
+      icon: <BsFilterCircleFill />,
+      dropdown: (
+        <DriverToolbarFilters
+          fetchFilteredData={fetchFilteredData}
+          isLoading={isLoading}
+        />
+      ),
     },
   ];
 
@@ -35,21 +39,29 @@ function DriversToolbar({ fetchFilteredData, driversListLen }) {
   }
 
   return (
-    <div className="flex flex-col mt-2 px-32 border-neutral-400 border-b-2 pb-3">
-      <div className="w-full flex items-end space-x-2">
-        <h1 className="text-5xl mr-16 mb-1 font-bold">Drivers</h1>
-        <div className="flex space-x-2">
-          {buttons.map((btn) => {
-            return (
-              <ToolbarButton
-                key={btn.name}
-                btn={btn}
-                toggleDropdown={toggleDropdown}
-                activeButton={activeButton}
-              />
-            );
-          })}
-        </div>
+    <div className="relative flex flex-col my-4 mx-4">
+      <div className="flex justify-between">
+        {buttons.map((btn) => {
+          return (
+            <ToolbarButton
+              key={btn.name}
+              btn={btn}
+              toggleDropdown={toggleDropdown}
+              activeButton={activeButton}
+            />
+          );
+        })}
+        <button
+          type="submit"
+          onClick={toggleNewModal}
+          className=" right-20 flex items-center justify-center
+          py-1 px-4 rounded-xl space-x-3 shadow-md font-bold border-2
+          bg-blue-400 border-blue-400 text-neutral-50
+          hover:bg-blue-500 hover:border-blue-500"
+        >
+          <BsPlusCircleFill /> <p>Add</p>
+        </button>
+        <NewDriverModal isOpen={isOpenNewModal} toggle={toggleNewModal} />
       </div>
       {activeButton && activeButton.dropdown}
     </div>

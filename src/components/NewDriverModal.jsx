@@ -2,15 +2,15 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { newVehicleSchema } from "../validations/vehicle";
+import { newDriverSchema } from "../validations/driver";
 import Loading from "./Loading";
 
-function NewVehicleModal({ isOpen, toggle }) {
+function NewDriverModal({ isOpen, toggle }) {
   const navigate = useNavigate();
 
   function onSubmit(values, actions) {
     axios
-      .post(`http://localhost:8000/vehicles/`, values)
+      .post(`http://localhost:8000/drivers/`, values)
       .then((resp) => {
         actions.resetForm();
         navigate(0);
@@ -28,27 +28,23 @@ function NewVehicleModal({ isOpen, toggle }) {
     isSubmitting,
   } = useFormik({
     initialValues: {
-      license_plate: "",
-      model: "",
-      status: "",
-      usage: "",
-      usage_type: "",
-      notes: "",
+      first_name: "",
+      last_name: "",
+      address: "",
+      email: "",
+      phone: "",
+      birthdate: "2000-09-26",
+      id_type: "",
+      id_number: "",
     },
-    validationSchema: newVehicleSchema,
+    validationSchema: newDriverSchema,
     onSubmit: onSubmit,
   });
-  const usageTypes = [
-    { apiName: "KM", humanName: "Kms" },
-    { apiName: "HR", humanName: "Hs" },
+  const idTypes = [
+    { apiName: "CI", humanName: "CI" },
+    { apiName: "PA", humanName: "PP" },
   ];
 
-  const statuses = [
-    { apiName: "AC", humanName: "Active" },
-    { apiName: "MA", humanName: "Maintenance" },
-    { apiName: "TA", humanName: "Repairs" },
-    { apiName: "IN", humanName: "Inactive" },
-  ];
   return (
     <div
       className={`z-20 mt-0 w-screen h-screen left-0 top-0 fixed
@@ -60,127 +56,144 @@ function NewVehicleModal({ isOpen, toggle }) {
         className="bg-neutral-50 border-2 px-16 py-10 rounded-xl
        border-neutral-500 flex flex-col"
       >
-        <h1 className="text-4xl mb-6 font-bold text-neutral-600">
-          New vehicle
-        </h1>
+        <h1 className="text-4xl mb-6 font-bold text-neutral-600">New driver</h1>
         <div className="flex mb-4 space-x-12">
           <div>
             <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
-              License
+              First name
             </p>
             <input
               type="text"
-              name="license_plate"
-              value={values.license_plate}
+              name="first_name"
+              value={values.first_name}
               onChange={handleChange}
               onBlur={handleBlur}
               className={`px-4 py-2 rounded-lg bg-neutral-200 text-neutral-800
                           ${
-                            errors.license_plate &&
-                            touched.license_plate &&
+                            errors.first_name &&
+                            touched.first_name &&
                             `border-red-500 border-2
                             focus:border-red-500 focus:outline-none`
                           }`}
-              placeholder="SOF 1696"
+              placeholder="Emiliano"
             />
-            {errors.license_plate && touched.license_plate && (
+            {errors.first_name && touched.first_name && (
               <p className="text-xs text-red-500 mt-1 ml-2">
-                {errors.license_plate}
+                {errors.first_name}
               </p>
             )}
           </div>
           <div>
             <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
-              Model
+              Last name
             </p>
             <input
               type="text"
-              name="model"
-              value={values.model}
+              name="last_name"
+              value={values.last_name}
               onChange={handleChange}
               onBlur={handleBlur}
               className={`px-4 py-2 rounded-lg bg-neutral-200 text-neutral-800
                           ${
-                            errors.model &&
-                            touched.model &&
+                            errors.last_name &&
+                            touched.last_name &&
                             `border-red-500 border-2
                             focus:border-red-500 focus:outline-none`
                           }`}
-              placeholder="Scania P410 XT"
+              placeholder="Rodriguez"
             />
-            {errors.model && touched.model && (
-              <p className="text-xs text-red-500 mt-1 ml-2">{errors.model}</p>
+            {errors.last_name && touched.last_name && (
+              <p className="text-xs text-red-500 mt-1 ml-2">
+                {errors.last_name}
+              </p>
+            )}
+          </div>
+        </div>
+        <div className="flex mb-4 space-x-12">
+          <div>
+            <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
+              Email
+            </p>
+            <input
+              type="text"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={`px-4 py-2 rounded-lg bg-neutral-200 text-neutral-800
+                          ${
+                            errors.email &&
+                            touched.email &&
+                            `border-red-500 border-2
+                            focus:border-red-500 focus:outline-none`
+                          }`}
+              placeholder="emiliano@email.com"
+            />
+            {errors.email && touched.email && (
+              <p className="text-xs text-red-500 mt-1 ml-2">{errors.email}</p>
+            )}
+          </div>
+          <div>
+            <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
+              Address
+            </p>
+            <input
+              type="text"
+              name="address"
+              value={values.address}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={`px-4 py-2 rounded-lg bg-neutral-200 text-neutral-800
+                          ${
+                            errors.address &&
+                            touched.address &&
+                            `border-red-500 border-2
+                            focus:border-red-500 focus:outline-none`
+                          }`}
+              placeholder="Miraflores 1635"
+            />
+            {errors.address && touched.address && (
+              <p className="text-xs text-red-500 mt-1 ml-2">{errors.address}</p>
             )}
           </div>
         </div>
         <div className="flex space-x-12 mb-4">
-          <div>
-            <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
-              Status
-            </p>
-
-            <select
-              name="status"
-              value={values.status}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={`px-4 py-2 rounded-lg bg-neutral-200 text-neutral-800
-             hover:bg-neutral-300
-             ${
-               errors.status &&
-               touched.status &&
-               `border-red-500 border-2
-               focus:border-red-500 focus:outline-none`
-             }`}
-            >
-              <option value="">Select a status</option>
-              {statuses.map((item) => {
-                return (
-                  <option key={item.apiName} value={item.apiName}>
-                    {item.humanName}
-                  </option>
-                );
-              })}
-            </select>
-            {errors.status && touched.status && (
-              <p className="text-xs text-red-500 mt-1 ml-2">{errors.status}</p>
-            )}
-          </div>
           <div className="flex-col">
             <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
-              Usage
+              ID
             </p>
             <div className="flex">
               <input
                 type="text"
-                name="usage"
-                value={values.usage}
+                name="id_number"
+                value={values.id_number}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`px-4 py-2 rounded-l-lg bg-neutral-200 text-neutral-800 z-10
+                className={`px-4 py-2 rounded-l-lg bg-neutral-200 z-10
+                 text-neutral-800 w-48
                                ${
-                                 errors.usage &&
-                                 touched.usage &&
+                                 errors.id_number &&
+                                 touched.id_number &&
                                  `border-red-500 border-2
                                  focus:border-red-500 focus:outline-none`
                                }`}
-                placeholder="Usage in hs or kms"
+                placeholder="61419712"
               />
               <select
-                name="usage_type"
-                value={values.usage_type}
+                name="id_type"
+                value={values.id_type}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`px-4 py-2 rounded-r-lg bg-neutral-200 text-neutral-800
                 hover:bg-neutral-300 ${
-                  errors.usage_type &&
-                  touched.usage_type &&
+                  errors.id_type &&
+                  touched.id_type &&
                   `border-red-500 border-2
                 focus:border-red-500 focus:outline-none`
                 }`}
               >
                 <option value="">--</option>
-                {usageTypes.map((item) => {
+                {idTypes.map((item) => {
                   return (
                     <option key={item.apiName} value={item.apiName}>
                       {item.humanName}
@@ -189,28 +202,38 @@ function NewVehicleModal({ isOpen, toggle }) {
                 })}
               </select>
             </div>
-            {errors.usage && touched.usage && (
+            {errors.id_number && touched.id_number && (
               <p className="text-xs text-red-500 mt-1 mx-2 flex-wrap">
-                {errors.usage}
+                {errors.id_number}
               </p>
             )}
           </div>
+          <div>
+            <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
+              Phone
+            </p>
+            <input
+              type="text"
+              name="phone"
+              value={values.phone}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={`px-4 py-2 rounded-lg bg-neutral-200 w-48
+               text-neutral-800
+                          ${
+                            errors.phone &&
+                            touched.phone &&
+                            `border-red-500 border-2
+                            focus:border-red-500 focus:outline-none`
+                          }`}
+              placeholder="094655951"
+            />
+            {errors.phone && touched.phone && (
+              <p className="text-xs text-red-500 mt-1 ml-2">{errors.phone}</p>
+            )}
+          </div>
         </div>
-        <div>
-          <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
-            Notes
-          </p>
-          <textarea
-            type="text"
-            rows="5"
-            name="notes"
-            value={values.notes}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className="px-4 py-2 w-full rounded-lg bg-neutral-200 text-neutral-800"
-            placeholder="Check tyre pressure, broken fender"
-          />
-        </div>
+
         <div
           className="flex mt-6
         "
@@ -241,4 +264,4 @@ function NewVehicleModal({ isOpen, toggle }) {
   );
 }
 
-export default NewVehicleModal;
+export default NewDriverModal;
