@@ -39,7 +39,7 @@ function NewVehicleModal({ isOpen, toggle }) {
   });
   const usageTypes = [
     { apiName: "KM", humanName: "Kms" },
-    { apiName: "HR", humanName: "Hrs" },
+    { apiName: "HR", humanName: "Hs" },
   ];
 
   const statuses = [
@@ -50,32 +50,38 @@ function NewVehicleModal({ isOpen, toggle }) {
   ];
   return (
     <div
-      className={`z-20 w-screen h-screen left-0 top-0 fixed
+      // onClick={toggle}
+      className={`z-20 mt-0 w-screen h-screen left-0 top-0 fixed
     flex flex-col justify-center items-center bg-neutral-600/50
     ${isOpen ? "visible" : "invisible"}`}
     >
       <form
         onSubmit={handleSubmit}
         className="bg-neutral-50 border-2 px-16 py-10 rounded-xl
-       border-neutral-600 flex flex-col"
+       border-neutral-500 flex flex-col"
       >
-        <h1 className="text-4xl mb-6 font-bold">New vehicle</h1>
+        <h1 className="text-4xl mb-6 font-bold text-neutral-600">
+          New vehicle
+        </h1>
         <div className="flex mb-4 space-x-12">
           <div>
-            <p className="text-sm italic mb-1 ml-1">License</p>
+            <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
+              License
+            </p>
             <input
               type="text"
               name="license_plate"
               value={values.license_plate}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-2 rounded-lg bg-neutral-100
-             focus:border-transparent focus:outline-none
-             ${
-               errors.license_plate &&
-               touched.license_plate &&
-               "border-red-500 border-2"
-             }`}
+              className={`px-4 py-2 rounded-lg bg-neutral-200 text-neutral-800
+                          ${
+                            errors.license_plate &&
+                            touched.license_plate &&
+                            `border-red-500 border-2
+                            focus:border-red-500 focus:outline-none`
+                          }`}
+              placeholder="SOF 1696"
             />
             {errors.license_plate && touched.license_plate && (
               <p className="text-xs text-red-500 mt-1 ml-2">
@@ -84,16 +90,23 @@ function NewVehicleModal({ isOpen, toggle }) {
             )}
           </div>
           <div>
-            <p className="text-sm italic mb-1 ml-1">Model</p>
+            <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
+              Model
+            </p>
             <input
               type="text"
               name="model"
               value={values.model}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-2 rounded-lg bg-neutral-100
-             focus:border-transparent focus:outline-none
-             ${errors.model && touched.model && "border-red-500 border-2"}`}
+              className={`px-4 py-2 rounded-lg bg-neutral-200 text-neutral-800
+                          ${
+                            errors.model &&
+                            touched.model &&
+                            `border-red-500 border-2
+                            focus:border-red-500 focus:outline-none`
+                          }`}
+              placeholder="Scania P410 XT"
             />
             {errors.model && touched.model && (
               <p className="text-xs text-red-500 mt-1 ml-2">{errors.model}</p>
@@ -102,16 +115,23 @@ function NewVehicleModal({ isOpen, toggle }) {
         </div>
         <div className="flex space-x-12 mb-4">
           <div>
-            <p className="text-sm italic mb-1 ml-1">Status</p>
+            <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
+              Status
+            </p>
 
             <select
               name="status"
               value={values.status}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-2 rounded-lg bg-neutral-100
-             focus:border-transparent focus:outline-none hover:bg-neutral-300
-             ${errors.status && touched.status && "border-red-500 border-2"}`}
+              className={`px-4 py-2 rounded-lg bg-neutral-200 text-neutral-800
+             hover:bg-neutral-300
+             ${
+               errors.status &&
+               touched.status &&
+               `border-red-500 border-2
+               focus:border-red-500 focus:outline-none`
+             }`}
             >
               <option value="">Select a status</option>
               {statuses.map((item) => {
@@ -127,7 +147,9 @@ function NewVehicleModal({ isOpen, toggle }) {
             )}
           </div>
           <div className="flex-col">
-            <p className="text-sm italic mb-1 ml-1">Usage</p>
+            <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
+              Usage
+            </p>
             <div className="flex">
               <input
                 type="text"
@@ -135,17 +157,27 @@ function NewVehicleModal({ isOpen, toggle }) {
                 value={values.usage}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`px-4 py-2 rounded-l-lg bg-neutral-100
-               focus:border-transparent focus:outline-none
-                ${errors.usage && touched.usage && "border-red-500 border-2"}`}
+                className={`px-4 py-2 rounded-l-lg bg-neutral-200 text-neutral-800 z-10
+                               ${
+                                 errors.usage &&
+                                 touched.usage &&
+                                 `border-red-500 border-2
+                                 focus:border-red-500 focus:outline-none`
+                               }`}
+                placeholder="Usage in hs or kms"
               />
               <select
                 name="usage_type"
                 value={values.usage_type}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="px-4 py-2 rounded-r-lg bg-neutral-100
-                hover:bg-neutral-300"
+                className={`px-4 py-2 rounded-r-lg bg-neutral-200 text-neutral-800
+                hover:bg-neutral-300 ${
+                  errors.usage_type &&
+                  touched.usage_type &&
+                  `border-red-500 border-2
+                focus:border-red-500 focus:outline-none`
+                }`}
               >
                 <option value="">--</option>
                 {usageTypes.map((item) => {
@@ -165,7 +197,9 @@ function NewVehicleModal({ isOpen, toggle }) {
           </div>
         </div>
         <div>
-          <p className="text-sm italic mb-1 ml-1">Notes</p>
+          <p className="text-sm italic mb-1 ml-1 font-bold text-neutral-500">
+            Notes
+          </p>
           <textarea
             type="text"
             rows="5"
@@ -173,8 +207,8 @@ function NewVehicleModal({ isOpen, toggle }) {
             value={values.notes}
             onChange={handleChange}
             onBlur={handleBlur}
-            className="px-4 py-2 w-full rounded-lg bg-neutral-100
-            borders:border-transparent focus:outline-none"
+            className="px-4 py-2 w-full rounded-lg bg-neutral-200 text-neutral-800"
+            placeholder="Check tyre pressure, broken fender"
           />
         </div>
         <div
@@ -184,14 +218,15 @@ function NewVehicleModal({ isOpen, toggle }) {
           <button
             type="submit"
             className="mr-4 px-4 py-2 rounded-xl bg-blue-400 text-neutral-50
-            border-2 border-blue-400 hover:text-blue-400
+            border-2 border-blue-400 hover:text-blue-400 font-bold
             hover:bg-neutral-50"
           >
-            Create vehicle
+            Create
           </button>
           <button
-            className="mr-4 px-4 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-50
-            border-2 border-neutral-200"
+            className="mr-4 px-4 py-2 rounded-xl bg-neutral-400 text-neutral-50
+            hover:bg-neutral-50 border-2 border-neutral-400 font-bold
+            hover:text-neutral-500"
             onClick={(e) => {
               e.preventDefault();
               toggle();

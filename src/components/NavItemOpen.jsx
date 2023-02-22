@@ -1,33 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import { TbChevronDown, TbChevronRight } from "react-icons/tb";
 import { Link, useLocation } from "react-router-dom";
+import NewVehicleModal from "./NewVehicleModal";
 
-function NavItemOpen({ name, icon, route, actions }) {
+function NavItemOpen({ name, icon, actions, showChevron }) {
   const location = useLocation();
+  const [isOpenNewModal, setIsOpenNewModal] = useState(false);
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
-  return (
-    <li className="flex flex-col">
-      <div>
-        <Link
-          to={route}
-          className="relative flex text-center items-center
-              align-center rounded-lg px-3 py-1 mx-3 w-44
-              text-neutral-600 hover:bg-neutral-300"
-        >
-          {icon}
-          <p className="text-base ml-4">
-            {name.charAt(0).toUpperCase() + name.slice(1)}
-          </p>
-        </Link>
-      </div>
-      <ul className="flex flex-col mt-2">
+  function toggleNewModal() {
+    setIsOpenNewModal(!isOpenNewModal);
+  }
+
+  function toggleDropdown() {
+    setIsOpenDropdown(!isOpenDropdown);
+  }
+
+  function dropdownComponent() {
+    return (
+      <ul className="flex flex-col mt-2 text-neutral-500 font-bold">
         {actions &&
           actions.map((action) => {
+            if (action.title === "New vehicle") {
+              return (
+                <button
+                  key={action.title}
+                  onClick={toggleNewModal}
+                  className={`mx-8 ml-6 px-2 py-1 text-sm  mb-1 rounded-lg
+hover:bg-neutral-300
+                      ${location.pathname === action.route && ""}`}
+                >
+                  <li className="flex space-x-4 items-center">
+                    <div>{action.icon}</div>
+                    <div>{action.title}</div>
+                  </li>
+                </button>
+              );
+            }
             return (
               <Link to={action.route} key={action.route}>
                 <li
                   className={`flex space-x-4 mx-8 ml-6 px-2 py-1 text-sm
-                items-center mb-1 hover:bg-neutral-300 rounded-lg
-                ${location.pathname === action.route && "bg-blue-300"}`}
+                  items-center mb-1 rounded-lg hover:bg-neutral-300
+                ${location.pathname === action.route && "bg-neutral-300"}`}
                 >
                   <div>{action.icon}</div>
                   <div>{action.title}</div>
@@ -36,7 +51,33 @@ function NavItemOpen({ name, icon, route, actions }) {
             );
           })}
       </ul>
-    </li>
+    );
+  }
+
+  return (
+    <>
+      <li className="flex flex-col">
+        <button
+          onClick={toggleDropdown}
+          className={`relative flex text-center items-center align-center rounded-lg
+           px-3 py-1 mx-3 w-44 hover:text-blue-400 ${
+             isOpenDropdown ? "text-blue-400" : "text-neutral-500"
+           }`}
+        >
+          {icon}
+          <p className="text-base ml-4 font-bold">
+            {name.charAt(0).toUpperCase() + name.slice(1)}
+          </p>
+          {showChevron && (
+            <div className="absolute right-3">
+              {isOpenDropdown ? <TbChevronDown /> : <TbChevronRight />}
+            </div>
+          )}
+        </button>
+        {isOpenDropdown && name && dropdownComponent()}
+      </li>
+      <NewVehicleModal isOpen={isOpenNewModal} toggle={toggleNewModal} />
+    </>
   );
 }
 

@@ -30,6 +30,27 @@ function ViewVehicleModal({ isOpen, toggle, vehicle }) {
     }
   }
 
+  function renderStatus() {
+    const statusName = STATUSES[vehicle.status];
+    let styles = "";
+    if (statusName === STATUSES["AC"]) {
+      styles = "bg-green-200 border-green-400 text-green-800";
+    } else if (statusName === STATUSES["MA"] || statusName === STATUSES["TA"]) {
+      styles = "bg-yellow-200 border-yellow-400 text-yellow-800";
+    } else {
+      styles = "bg-red-200 border-red-400 text-red-800";
+    }
+
+    return (
+      <p
+        className={`${styles} font-bold rounded-lg px-2 py-1 w-full text-center
+        text-sm overflow-hidden`}
+      >
+        {statusName}
+      </p>
+    );
+  }
+
   return (
     <div
       className={`z-20 w-screen h-screen left-0 top-0 fixed
@@ -38,28 +59,37 @@ function ViewVehicleModal({ isOpen, toggle, vehicle }) {
     >
       <div
         className="bg-neutral-50 border-2 px-16 py-10 rounded-xl
-       border-neutral-600 flex flex-col"
+       border-neutral-500 flex flex-col text-neutral-700"
       >
         <div className="flex space-x-12">
           <div>
-            <p className="pl-1 text-sm italic">License</p>
-            <h1 className="text-4xl mb-2 font-bold">{vehicle.license_plate}</h1>
-          </div>
-          <div>
-            <p className="pl-1 text-sm italic">Model</p>
-            <h2 className="text-2xl mb-6">{vehicle.model}</h2>
+            <p className="ml-1 text-sm italic font-bold text-neutral-500">
+              License
+            </p>
+            <p className="text-4xl mb-2 font-bold">{vehicle.license_plate}</p>
           </div>
         </div>
         <div className="flex space-x-12">
           <div>
-            <p className="pl-1 text-sm italic">Status</p>
-            <h1 className="text-xl mb-2 flex justify-center items-center space-x-2">
-              <div>{STATUSES[vehicle.status]} </div>
-              <div>{renderStatusColorCode()}</div>
+            <p className="ml-1 text-sm italic font-bold text-neutral-500">
+              Model
+            </p>
+            <p className="text-2xl mb-6">{vehicle.model}</p>
+          </div>
+        </div>
+        <div className="flex space-x-12">
+          <div>
+            <p className="ml-1 text-sm italic font-bold text-neutral-500">
+              Status
+            </p>
+            <h1 className="text-xl mb-2 mt-1 flex justify-center items-center space-x-2">
+              {renderStatus()}
             </h1>
           </div>
           <div>
-            <p className="pl-1 text-sm italic">Usage</p>
+            <p className="ml-1 text-sm italic font-bold text-neutral-500">
+              Usage
+            </p>
             <h2 className="text-xl mb-6">
               {`${vehicle.usage.toLocaleString("en-us")}  ${
                 vehicle.usage_type === "HR" ? "hs" : "kms"
@@ -68,14 +98,18 @@ function ViewVehicleModal({ isOpen, toggle, vehicle }) {
           </div>
         </div>
         <div>
-          <p className="pl-1 text-sm italic mb-1">Notes</p>
+          <p className="ml-1 text-sm italic font-bold text-neutral-500 mb-1">
+            Notes
+          </p>
           <p className="text-md italic text-neutral-700 mb-6 p-2 rounded-lg border-2">
             {renderVehicleNotes()}
           </p>
         </div>
         <div className="flex">
           <button
-            className="mr-4 px-4 py-2 rounded-xl bg-neutral-100"
+            className="mr-4 px-4 py-2 rounded-xl bg-neutral-400 text-neutral-50
+            hover:bg-neutral-50 border-2 border-neutral-400 font-bold
+            hover:text-neutral-500"
             onClick={toggle}
           >
             Cancel

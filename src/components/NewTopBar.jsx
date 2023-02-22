@@ -1,5 +1,6 @@
 import React from "react";
 import { BsQuestion, BsSearch } from "react-icons/bs";
+import { MdOutlineSearch } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
 import { TbManualGearbox } from "react-icons/tb";
 import { Link } from "react-router-dom";
@@ -8,7 +9,7 @@ function NewTopBar() {
   const iconSize = 20;
   return (
     <div
-      className="z-20 w-full bg-neutral-50 flex items-center
+      className="z-20 w-full bg-neutral-100 flex items-center
     justify-between px-5"
     >
       <div className="flex items-center justify-center">
@@ -17,7 +18,7 @@ function NewTopBar() {
         </div>
         <div className="font-bold text-neutral-500">fleet manager</div>
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center l">
         <input
           type="text"
           placeholder="Search"
@@ -26,10 +27,10 @@ function NewTopBar() {
         />
         <div
           className="w-12 h-8 rounded-r-full bg-neutral-200
-         hover:bg-neutral-300
+         hover:bg-neutral-300 text-neutral-700
          flex items-center justify-center"
         >
-          <BsSearch />
+          <MdOutlineSearch />
         </div>
       </div>
       <div className="flex items-center justify-center space-x-3">

@@ -1,21 +1,36 @@
 import React, { useState } from "react";
 
-import { BsPlusSquare, BsSliders } from "react-icons/bs";
+import { BsFilterCircleFill, BsPlusCircleFill } from "react-icons/bs";
 import NewVehicleModal from "./NewVehicleModal";
 
 import ToolbarButton from "./ToolbarButton";
 import VehicleToolbarFilters from "./VehicleToolbarFilters";
 
-function VehiclesToolbar({ fetchFilteredData }) {
+function VehiclesToolbar({
+  fetchFilteredData,
+  vehiclesListLen,
+  totalVehicleCount,
+}) {
   const [activeButton, setActiveButton] = useState(null);
   const [isOpenNewModal, setIsOpenNewModal] = useState(false);
+
+  function toggleNewModal() {
+    setIsOpenNewModal(!isOpenNewModal);
+  }
 
   const buttons = [
     {
       name: "filter",
       title: "Filters",
-      icon: <BsSliders />,
-      dropdown: <VehicleToolbarFilters fetchFilteredData={fetchFilteredData} />,
+      icon: <BsFilterCircleFill />,
+      dropdown: (
+        <VehicleToolbarFilters
+          fetchFilteredData={fetchFilteredData}
+          vehiclesListLen={vehiclesListLen}
+          totalVehicleCount={totalVehicleCount}
+          isOpen={true}
+        />
+      ),
     },
   ];
 
@@ -31,13 +46,9 @@ function VehiclesToolbar({ fetchFilteredData }) {
     }
   }
 
-  function toggleNewModal() {
-    setIsOpenNewModal(!isOpenNewModal);
-  }
-
   return (
-    <div className="flex flex-col my-4 mx-4">
-      <div className="flex justify-bet">
+    <div className="relative flex flex-col my-4 mx-4">
+      <div className="flex justify-between">
         {buttons.map((btn) => {
           return (
             <ToolbarButton
@@ -51,12 +62,12 @@ function VehiclesToolbar({ fetchFilteredData }) {
         <button
           type="submit"
           onClick={toggleNewModal}
-          className="absolute right-20 flex items-center justify-center
-          py-1 px-4 rounded-lg space-x-3 shadow-md
-          bg-blue-400 text-neutral-50
-          hover:bg-blue-500"
+          className=" right-20 flex items-center justify-center
+          py-1 px-4 rounded-xl space-x-3 shadow-md font-bold border-2
+          bg-blue-400 border-blue-400 text-neutral-50
+          hover:bg-blue-500 hover:border-blue-500"
         >
-          <BsPlusSquare /> <p>Add</p>
+          <BsPlusCircleFill /> <p>Add</p>
         </button>
         <NewVehicleModal isOpen={isOpenNewModal} toggle={toggleNewModal} />
       </div>

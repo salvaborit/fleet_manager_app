@@ -30,18 +30,7 @@ function App() {
     {
       path: "/vehicles",
       element: <VehiclesRoute />,
-      children: [
-        {
-          path: "/vehicles/filters",
-          element: (
-            <VehiclesRoute toolbarDropdown={<VehicleToolbarFilters />} />
-          ),
-        },
-        {
-          path: "/vehicles/new",
-          element: <VehiclesRoute toolbarDropdown={<></>} />,
-        },
-      ],
+      children: [],
     },
     {
       path: "/drivers",
@@ -73,12 +62,17 @@ function App() {
   return (
     <div
       className="fixed flex flex-col w-full h-full
-                 bg-neutral-50"
+                 bg-neutral-100"
     >
       <NewTopBar />
-      <div className="flex h-full w-full">
+      <div className="fixed flex h-full w-full pt-10">
         <NewNavBar isOpenMenu={isOpenMenu} />
-        <div className="w-full h-full bg-neutral-50 pl-10 pr-14">{routes}</div>
+        <div
+          className="w-full h-full bg-neutral-100 pl-10 pr-14
+        overflow-y-auto max-w-full"
+        >
+          {routes}
+        </div>
       </div>
     </div>
   );

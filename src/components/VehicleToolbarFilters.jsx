@@ -1,14 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
-import { BsSearch } from "react-icons/bs";
+import { FaSearch } from "react-icons/fa";
 
 import { vehicleFilterSchema } from "../validations/vehicle";
 
 function VehicleToolbarFilters({ fetchFilteredData }) {
-  const navigate = useNavigate();
-
   const usageTypes = [
     { apiName: "KM", humanName: "Kms" },
     { apiName: "HR", humanName: "Hrs" },
@@ -49,13 +46,13 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="container w-full mt-8 pb-6 flex flex-col space-y-2"
+      className="relative container w-full mt-8 mb-6 flex flex-col space-y-2"
     >
       <div className="flex space-x-10">
         <div className="flex flex-col">
           <label
             htmlFor="license_plate"
-            className="ml-2 mb-1 text-sm text-neutral-600"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold"
           >
             License
           </label>
@@ -65,15 +62,15 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             value={values.license_plate}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-100
-             text-neutral-800 placeholder:text-neutral-500
-             w-40 focus:border-transparent focus:outline-none
+            className={`px-4 py-1 rounded-lg bg-neutral-200
+             text-neutral-800 placeholder:text-neutral-400
+             w-40
              ${
                errors.license_plate &&
                touched.license_plate &&
-               "border-red-500 border-2"
+               `border-red-500 border-2 focus:border-red-500 focus:outline-none`
              }`}
-            placeholder="SOF1696..."
+            placeholder="SOF 1696"
           />
           {errors.license_plate && touched.license_plate && (
             <p className="text-xs text-red-500 mt-1 ml-2">
@@ -84,7 +81,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
         <div className="flex flex-col">
           <label
             htmlFor="license"
-            className="ml-2 mb-1 text-sm text-neutral-600"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold"
           >
             Model
           </label>
@@ -94,11 +91,15 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             value={values.model}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-100
-             text-neutral-800 placeholder:text-neutral-500
-             focus:border-transparent focus:outline-none
-             ${errors.model && touched.model && "border-red-500 border-2"}`}
-            placeholder="Scania P410X.."
+            className={`px-4 py-1 rounded-lg bg-neutral-200
+             text-neutral-800 placeholder:text-neutral-400
+
+             ${
+               errors.model &&
+               touched.model &&
+               `border-red-500 border-2 focus:border-red-500 focus:outline-none`
+             }`}
+            placeholder="Scania P410 XT"
           />
           {errors.model && touched.model && (
             <p className="text-xs text-red-500 mt-1 ml-2">{errors.model}</p>
@@ -107,7 +108,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
         <div className="flex flex-col">
           <label
             htmlFor="license"
-            className="ml-2 mb-1 text-sm text-neutral-600"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold"
           >
             Status
           </label>
@@ -116,9 +117,13 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             value={values.status}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-6 py-2 rounded-lg bg-neutral-100
-             text-neutral-800 hover:bg-neutral-300
-             ${errors.status && touched.status && "border-red-500 border-2"}`}
+            className={`px-6 py-2 rounded-lg bg-neutral-200
+             text-neutral-600 hover:bg-neutral-300
+             ${
+               errors.status &&
+               touched.status &&
+               `border-red-500 border-2 focus:border-red-500 focus:outline-none`
+             }`}
           >
             <option value="">Select a status</option>
 
@@ -136,7 +141,10 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
         </div>
       </div>
       <div className="flex flex-col">
-        <label htmlFor="license" className="ml-2 mb-1 text-sm text-neutral-600">
+        <label
+          htmlFor="license"
+          className="ml-2 mb-1 text-sm text-neutral-500 font-bold"
+        >
           Usage
         </label>
         <div className="flex space-x-4 relative">
@@ -147,13 +155,13 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
               value={values.min_usage}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-1 rounded-lg bg-neutral-100
-               text-neutral-800 placeholder:text-neutral-500
-               w-48 focus:border-transparent focus:outline-none
+              className={`px-4 py-1 rounded-lg bg-neutral-200
+               text-neutral-800 placeholder:text-neutral-400
+               w-48
                ${
                  errors.min_usage &&
                  touched.min_usage &&
-                 "border-red-500 border-2"
+                 `"border-red-500 border-2 focus:border-red-500 focus:outline-none`
                }`}
               placeholder="Minimum"
             />
@@ -164,13 +172,13 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
               value={values.max_usage}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-1 rounded-lg bg-neutral-100
-               text-neutral-800 placeholder:text-neutral-500
-               w-48 focus:border-transparent focus:outline-none
+              className={`px-4 py-1 rounded-lg bg-neutral-200
+               text-neutral-800 placeholder:text-neutral-400
+               w-48
                ${
                  errors.max_usage &&
                  touched.max_usage &&
-                 "border-red-500 border-2"
+                 `"border-red-500 border-2 focus:border-red-500 focus:outline-none`
                }`}
               placeholder="Maximum"
             />
@@ -180,8 +188,8 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             value={values.usage_type}
             onChange={handleChange}
             onBlur={handleBlur}
-            className="px-6 py-1 rounded-lg bg-neutral-100
-           text-neutral-800 hover:bg-neutral-300"
+            className="px-6 py-1 rounded-lg bg-neutral-200
+           text-neutral-600 hover:bg-neutral-300"
           >
             <option value="">--</option>
             {usageTypes.map((item) => {
@@ -195,10 +203,10 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
           <button
             type="submit"
             className="absolute bottom-0 right-0 py-4 px-4 rounded-full
-             bg-blue-300 border-2 border-blue-300
-              hover:bg-neutral-50 shadow-md"
+             bg-blue-400 border-2 border-blue-400 hover:text-blue-400
+              hover:bg-neutral-50 shadow-md text-neutral-50"
           >
-            <BsSearch />
+            <FaSearch />
           </button>
         </div>
       </div>

@@ -38,9 +38,6 @@ function DriversRoute() {
           fetchFilteredData={fetchFilteredData}
           driversListLen={driversList.length}
         />
-        <p className="italic text-sm text-neutral-600 mb-14 mt-2 ml-32">
-          Showing {driversList.length} results
-        </p>
       </div>
       <div className="container self-center">
         {isLoading ? <Loading /> : <DriversList driversList={driversList} />}

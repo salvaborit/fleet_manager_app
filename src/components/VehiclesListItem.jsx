@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  BsInfoCircleFill,
-  BsPencil,
-  BsTrashFill,
-  BsTruck,
-} from "react-icons/bs";
+import { TbInfoCircle, TbEdit, TbTrash } from "react-icons/tb";
 import DeleteVehicleModal from "./DeleteVehicleModal";
 import EditVehicleModal from "./EditVehicleModal";
 import ViewVehicleModal from "./ViewVehicleModal";
@@ -49,81 +44,85 @@ function VehiclesListItem({ vehicle }) {
     }
 
     return (
-      <td className={`${styles} font-bold rounded-lg border-2 px-2 text-sm`}>
+      <td
+        className={`${styles} font-bold rounded-lg px-2 py-1 w-full text-center
+        text-sm overflow-hidden`}
+      >
         {statusName}
       </td>
     );
   }
 
-  const styles = { width: "10%" };
-
   return (
-    <tr
-      className="flex items-center justify-between
-       bg-neutral-100 w-full text-neutral-900"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <td className="flex flex-col ml-10 w-1/12 font-bold">
-        <p>{vehicle.license_plate}</p>
-      </td>
-      <td className="flex flex-col w-3/12">
-        <p>{vehicle.model}</p>
-      </td>
-      <td className=" w-1/12">
-        {`${vehicle.usage.toLocaleString("en-us")} ${
-          vehicle.usage_type === "HR" ? "hs" : "kms"
-        }`}
-      </td>
-      <td
-        className="text-md flex justify-center items-center
-        w-1/12"
+    <>
+      <tr
+        className="flex text-neutral-700"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        {renderStatus()}
-      </td>
-      <td
-        className={`flex text-sm space-x-2 mr-10 ${
-          isHovered ? "visible" : "invisible"
-        }`}
-      >
-        <button
-          onClick={toggleViewModal}
-          className="flex items-center justify-center hover:bg-blue-300
-         px-2 py-2 space-x-2 rounded-lg hover:shadow-sm"
+        <td className="flex flex-col ml-10 w-2/12 font-bold">
+          <p>{vehicle.license_plate}</p>
+        </td>
+        <td className="flex flex-col w-4/12">
+          <p>{vehicle.model}</p>
+        </td>
+        <td className=" w-2/12">
+          {`${vehicle.usage.toLocaleString("en-us")} ${
+            vehicle.usage_type === "HR" ? "hs" : "kms"
+          }`}
+        </td>
+        <td
+          className="text-md flex justify-center items-center
+          w-1/12"
         >
-          <BsInfoCircleFill size={iconSize} />
-        </button>
-        <ViewVehicleModal
-          isOpen={isOpenViewModal}
-          toggle={toggleViewModal}
-          vehicle={vehicle}
-        />
-        <button
-          onClick={toggleEditModal}
-          className="flex items-center justify-center hover:bg-blue-300
-         px-2 py-1 space-x-2 rounded-lg hover:shadow-sm"
+          {renderStatus()}
+        </td>
+        <td
+          className={`flex text-center justify-center text-sm space-x-2
+           m-auto ${isHovered ? "visible" : "invisible"}`}
         >
-          <BsPencil size={iconSize} />
-        </button>
-        <EditVehicleModal
-          isOpen={isOpenEditModal}
-          toggle={toggleEditModal}
-          vehicle={vehicle}
-        />
-        <button
-          onClick={toggleDeleteModal}
-          className="flex items-center justify-center hover:bg-blue-300
-         px-2 py-1 space-x-2 rounded-lg hover:shadow-sm"
-        >
-          <BsTrashFill size={iconSize} />
-        </button>
-        <DeleteVehicleModal
-          isOpen={isOpenDeleteModal}
-          toggle={toggleDeleteModal}
-          vehicle={vehicle}
-        />
-      </td>
-    </tr>
+          <button
+            onClick={toggleViewModal}
+            className="flex items-center justify-center border-2 w-10 h-10 rounded-lg shadow-lg
+              text-neutral-400 border-neutral-400
+              hover:bg-neutral-200 hover:text-neutral-500"
+          >
+            <TbInfoCircle size={iconSize} />
+          </button>
+          <button
+            onClick={toggleEditModal}
+            className="flex items-center justify-center border-2 w-10 h-10 rounded-lg shadow-lg
+              text-blue-400 border-blue-400
+              hover:bg-blue-200 hover:text-blue-500"
+          >
+            <TbEdit size={iconSize} />
+          </button>
+          <button
+            onClick={toggleDeleteModal}
+            className="flex items-center justify-center border-2 w-10 h-10 rounded-lg shadow-lg
+               text-red-400 border-red-400
+               hover:bg-red-200 hover:text-red-500"
+          >
+            <TbTrash size={iconSize} />
+          </button>
+        </td>
+      </tr>
+      <EditVehicleModal
+        isOpen={isOpenEditModal}
+        toggle={toggleEditModal}
+        vehicle={vehicle}
+      />
+      <DeleteVehicleModal
+        isOpen={isOpenDeleteModal}
+        toggle={toggleDeleteModal}
+        vehicle={vehicle}
+      />
+      <ViewVehicleModal
+        isOpen={isOpenViewModal}
+        toggle={toggleViewModal}
+        vehicle={vehicle}
+      />
+    </>
   );
 }
 

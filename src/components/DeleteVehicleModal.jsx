@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { BsTruck } from "react-icons/bs";
+import { TbTruck } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 
 function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
@@ -44,7 +44,7 @@ function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
     >
       <div
         className="bg-neutral-50 border-2 px-16 py-10 rounded-xl
-       border-neutral-600 flex flex-col"
+       border-neutral-500 flex flex-col text-neutral-700"
       >
         <h1 className="text-4xl mb-6 font-bold">Are you sure?</h1>
 
@@ -54,7 +54,7 @@ function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
         rounded-full bg-neutral-100 self-center pr-10 shadow-lg"
         >
           <div className=" relative p-4 rounded-full bg-neutral-300">
-            <BsTruck size={40} />
+            <TbTruck size={40} />
             <div className="absolute right-1 bottom-1">
               {renderStatusColorCode()}
             </div>
@@ -87,7 +87,9 @@ function DeleteVehicleModal({ isOpen, toggle, vehicle }) {
             Delete
           </button>
           <button
-            className="mr-4 px-4 py-2 rounded-xl bg-neutral-100"
+            className="mr-4 px-4 py-2 rounded-xl bg-neutral-400 text-neutral-50
+            hover:bg-neutral-50 border-2 border-neutral-400 font-bold
+            hover:text-neutral-500"
             onClick={toggle}
           >
             Cancel
