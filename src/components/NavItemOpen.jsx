@@ -57,19 +57,20 @@ function NavItemOpen({ name, icon, actions, showChevron }) {
                   </li>
                 </button>
               );
-            }
-            return (
-              <Link to={action.route} key={action.route}>
-                <li
-                  className={`flex space-x-4 mx-8 ml-6 px-2 py-1 text-sm
+            } else {
+              return (
+                <Link to={action.route} key={action.route}>
+                  <li
+                    className={`flex space-x-4 mx-8 ml-6 px-2 py-1 text-sm
                   items-center mb-1 rounded-lg hover:bg-neutral-300
                 ${location.pathname === action.route && "bg-neutral-300"}`}
-                >
-                  <div>{action.icon}</div>
-                  <div>{action.title}</div>
-                </li>
-              </Link>
-            );
+                  >
+                    <div>{action.icon}</div>
+                    <div>{action.title}</div>
+                  </li>
+                </Link>
+              );
+            }
           })}
       </ul>
     );
@@ -95,7 +96,7 @@ function NavItemOpen({ name, icon, actions, showChevron }) {
             </div>
           )}
         </button>
-        {isOpenDropdown && name && dropdownComponent()}
+        {showChevron && isOpenDropdown && name && dropdownComponent()}
       </li>
       <NewVehicleModal
         isOpen={isOpenNewVehicleModal}

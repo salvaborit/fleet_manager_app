@@ -9,6 +9,7 @@ import {
 } from "react-icons/bs";
 import { TbTruck, TbUsers, TbListSearch, TbPlus } from "react-icons/tb";
 import NavItemOpen from "./NavItemOpen";
+import SecNavItemOpen from "./SecNavItemOpen";
 
 function NewNavBar() {
   const navIconSize = 25;
@@ -84,12 +85,11 @@ function NewNavBar() {
         <ul className="flex flex-col space-y-4 pr-1">
           {secNavItems.map((item) => {
             return (
-              <NavItemOpen
+              <SecNavItemOpen
                 key={item.route}
                 route={item.route}
                 icon={item.icon}
                 name={item.name}
-                showChevron={false}
               />
             );
           })}
