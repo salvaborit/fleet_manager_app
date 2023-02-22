@@ -99,7 +99,7 @@ function VehiclesListItem({ vehicle }) {
           </button>
           <button
             onClick={toggleDeleteModal}
-            className="flex items-center justify-center border-2 w-10 h-10 rounded-lg shadow-lg
+            className="flex justify-center border-2 w-10 h-10 rounded-lg shadow-lg
                text-red-400 border-red-400
                hover:bg-red-200 hover:text-red-500"
           >

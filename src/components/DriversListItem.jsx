@@ -5,6 +5,7 @@ import {
   BsPerson,
   BsTrashFill,
 } from "react-icons/bs";
+import { TbEdit, TbInfoCircle, TbTrash } from "react-icons/tb";
 import DeleteDriverModal from "./DeleteDriverModal";
 import EditDriverModal from "./EditDriverModal";
 import ViewDriverModal from "./ViewDriverModal";
@@ -15,6 +16,8 @@ function DriversListItem({ driver }) {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
   const [isHovered, setIsHovered] = useState(false);
+
+  const iconSize = 20;
 
   function toggleViewModal() {
     setIsOpenViewModal(!isOpenViewModal);
@@ -28,67 +31,72 @@ function DriversListItem({ driver }) {
     setIsOpenDeleteModal(!isOpenDeleteModal);
   }
   return (
-    <div
-      className="flex items-center space-x-20 rounded-full
-       bg-neutral-100 justify-between shadow-md w-2/3 text-neutral-900"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="p-8 rounded-full bg-neutral-200">
-        <BsPerson size={80} color={"#2a2a2a"} />
-      </div>
-      <div className="flex flex-col">
-        <h2 className="text-3xl font-bold text-center">
-          {driver.first_name} {driver.last_name}
-        </h2>
-        <h2 className="text-xl text-center">{driver.phone}</h2>
-      </div>
-      <div
-        className={`pr-12 space-y-1 text-sm px-2 ${
-          isHovered ? "visible" : "invisible"
-        }`}
+    <>
+      <tr
+        className="flex text-neutral-700"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <button
-          onClick={toggleViewModal}
-          className="flex items-center justify-center hover:bg-red-300
-         px-4 py-1 space-x-2 rounded-full hover:shadow-sm"
+        <td className="flex flex-col ml-10 w-4/12 font-bold">
+          <p>
+            {driver.first_name} {driver.last_name}
+          </p>
+        </td>
+
+        <td className="flex flex-col w-2/12">
+          <p>{driver.phone}</p>
+        </td>
+
+        <td className="flex flex-col w-3/12">
+          <p>{driver.email}</p>
+        </td>
+
+        <td
+          className={`flex justify-center text-sm space-x-2 m-auto
+          ${isHovered ? "visible" : "invisible"}`}
         >
-          <BsInfoCircleFill />
-          <p>Info</p>
-        </button>
-        <ViewDriverModal
-          isOpen={isOpenViewModal}
-          toggle={toggleViewModal}
-          driver={driver}
-        />
-        <button
-          onClick={toggleEditModal}
-          className="flex items-center justify-center hover:bg-red-300
-         px-4 py-1 space-x-2 rounded-full hover:shadow-sm"
-        >
-          <BsPencil />
-          <p>Edit</p>
-        </button>
-        <EditDriverModal
-          isOpen={isOpenEditModal}
-          toggle={toggleEditModal}
-          driver={driver}
-        />
-        <button
-          onClick={toggleDeleteModal}
-          className="flex items-center justify-center hover:bg-red-300
-         px-4 py-1 space-x-2 rounded-full hover:shadow-sm"
-        >
-          <BsTrashFill />
-          <p>Delete</p>
-        </button>
-        <DeleteDriverModal
-          isOpen={isOpenDeleteModal}
-          toggle={toggleDeleteModal}
-          driver={driver}
-        />
-      </div>
-    </div>
+          <button
+            onClick={toggleViewModal}
+            className="flex items-center justify-center border-2 w-10 h-10
+            rounded-lg shadow-lg text-neutral-400 border-neutral-400
+              hover:bg-neutral-200 hover:text-neutral-500"
+          >
+            <TbInfoCircle size={iconSize} />
+          </button>
+          <button
+            onClick={toggleEditModal}
+            className="flex items-center justify-center border-2 w-10 h-10
+            rounded-lg shadow-lg text-blue-400 border-blue-400
+              hover:bg-blue-200 hover:text-blue-500"
+          >
+            <TbEdit size={iconSize} />
+          </button>
+          <button
+            onClick={toggleDeleteModal}
+            className="flex items-center justify-center border-2 w-10 h-10
+            rounded-lg shadow-lg text-red-400 border-red-400
+               hover:bg-red-200 hover:text-red-500"
+          >
+            <TbTrash size={iconSize} />
+          </button>
+        </td>
+      </tr>
+      <ViewDriverModal
+        isOpen={isOpenViewModal}
+        toggle={toggleViewModal}
+        driver={driver}
+      />
+      <EditDriverModal
+        isOpen={isOpenEditModal}
+        toggle={toggleEditModal}
+        driver={driver}
+      />
+      <DeleteDriverModal
+        isOpen={isOpenDeleteModal}
+        toggle={toggleDeleteModal}
+        driver={driver}
+      />
+    </>
   );
 }
 
