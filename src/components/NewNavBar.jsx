@@ -43,7 +43,7 @@ function NewNavBar() {
         {
           title: "New driver",
           icon: <TbPlus />,
-          route: "/drivers/new",
+          route: "/drivers",
         },
       ],
     },

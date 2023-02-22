@@ -1,18 +1,25 @@
 import axios from "axios";
-import React from "react";
-import { BsPerson } from "react-icons/bs";
+import React, { useState } from "react";
+import { TbUser } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 function DeleteDriverModal({ isOpen, toggle, driver }) {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleDelete() {
+    setIsLoading(true);
     axios
       .delete(`http://localhost:8000/drivers/${driver.id}/`)
       .then((resp) => {
+        setIsLoading(false);
         navigate(0);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -23,7 +30,7 @@ function DeleteDriverModal({ isOpen, toggle, driver }) {
     >
       <div
         className="bg-neutral-50 border-2 px-16 py-10 rounded-xl
-       border-neutral-600 flex flex-col"
+       border-neutral-500 flex flex-col text-neutral-700"
       >
         <h1 className="text-4xl mb-6 font-bold">Are you sure?</h1>
 
@@ -33,7 +40,7 @@ function DeleteDriverModal({ isOpen, toggle, driver }) {
         rounded-full bg-neutral-100 self-center pr-10 shadow-lg"
         >
           <div className=" relative p-4 rounded-full bg-neutral-300">
-            <BsPerson size={40} />
+            <TbUser size={40} />
           </div>
           <div className="flex flex-col font-bold text-lg">
             <p>
@@ -41,10 +48,11 @@ function DeleteDriverModal({ isOpen, toggle, driver }) {
             </p>
             <p className="text-sm font-normal">{driver.phone}</p>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col text-sm">
             <p>{driver.birthdate}</p>
             <p>
               {driver.id_type}
+              &nbsp;
               {driver.id_number}
             </p>
           </div>
@@ -65,13 +73,16 @@ function DeleteDriverModal({ isOpen, toggle, driver }) {
             Delete
           </button>
           <button
-            className="mr-4 px-4 py-2 rounded-xl bg-neutral-100"
+            className="mr-4 px-4 py-2 rounded-xl bg-neutral-400 text-neutral-50
+            hover:bg-neutral-50 border-2 border-neutral-400 font-bold
+            hover:text-neutral-500"
             onClick={toggle}
           >
             Cancel
           </button>
         </div>
       </div>
+      {isLoading && <Loading />}
     </div>
   );
 }

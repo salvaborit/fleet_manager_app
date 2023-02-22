@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import { TbChevronDown, TbChevronRight } from "react-icons/tb";
 import { Link, useLocation } from "react-router-dom";
 import NewVehicleModal from "./NewVehicleModal";
+import NewDriverModal from "./NewDriverModal";
 
 function NavItemOpen({ name, icon, actions, showChevron }) {
   const location = useLocation();
-  const [isOpenNewModal, setIsOpenNewModal] = useState(false);
+  const [isOpenNewVehicleModal, setIsOpenNewVehicleModal] = useState(false);
+  const [isOpenNewDriverModal, setIsOpenNewDriverModal] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
-  function toggleNewModal() {
-    setIsOpenNewModal(!isOpenNewModal);
+  function toggleNewVehicleModal() {
+    setIsOpenNewVehicleModal(!isOpenNewVehicleModal);
+  }
+
+  function toggleNewDriverModal() {
+    setIsOpenNewDriverModal(!isOpenNewDriverModal);
   }
 
   function toggleDropdown() {
@@ -25,9 +31,24 @@ function NavItemOpen({ name, icon, actions, showChevron }) {
               return (
                 <button
                   key={action.title}
-                  onClick={toggleNewModal}
+                  onClick={toggleNewVehicleModal}
                   className={`mx-8 ml-6 px-2 py-1 text-sm  mb-1 rounded-lg
-hover:bg-neutral-300
+                    hover:bg-neutral-300
+                      ${location.pathname === action.route && ""}`}
+                >
+                  <li className="flex space-x-4 items-center">
+                    <div>{action.icon}</div>
+                    <div>{action.title}</div>
+                  </li>
+                </button>
+              );
+            } else if (action.title === "New driver") {
+              return (
+                <button
+                  key={action.title}
+                  onClick={toggleNewDriverModal}
+                  className={`mx-8 ml-6 px-2 py-1 text-sm  mb-1 rounded-lg
+                    hover:bg-neutral-300
                       ${location.pathname === action.route && ""}`}
                 >
                   <li className="flex space-x-4 items-center">
@@ -76,7 +97,14 @@ hover:bg-neutral-300
         </button>
         {isOpenDropdown && name && dropdownComponent()}
       </li>
-      <NewVehicleModal isOpen={isOpenNewModal} toggle={toggleNewModal} />
+      <NewVehicleModal
+        isOpen={isOpenNewVehicleModal}
+        toggle={toggleNewVehicleModal}
+      />
+      <NewDriverModal
+        isOpen={isOpenNewDriverModal}
+        toggle={toggleNewDriverModal}
+      />
     </>
   );
 }
