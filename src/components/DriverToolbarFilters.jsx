@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 
 import { driverFilterSchema } from "../validations/driver";
 import { BsSearch } from "react-icons/bs";
+import { FaSearch } from "react-icons/fa";
 
 function DriverToolbarFilters({ fetchFilteredData }) {
   function onSubmit(values) {
@@ -39,14 +40,13 @@ function DriverToolbarFilters({ fetchFilteredData }) {
   return (
     <form
       onSubmit={handleSubmit}
-      autoComplete="off"
-      className="container w-full mt-8 pb-6 flex flex-col space-y-2"
+      className="relative container w-full mt-8 pb-6 flex flex-col space-y-2"
     >
       <div className="flex space-x-10">
         <div className="flex flex-col">
           <label
             htmlFor="first_name"
-            className="ml-2 mb-1 text-sm text-neutral-600"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
           >
             First name
           </label>
@@ -56,13 +56,13 @@ function DriverToolbarFilters({ fetchFilteredData }) {
             value={values.first_name}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-100
-             text-neutral-800 placeholder:text-neutral-500
-             w-56 focus:border-transparent focus:outline-none
+            className={`px-4 py-1 rounded-lg bg-neutral-200
+             text-neutral-800 placeholder:text-neutral-400
+             w-56
              ${
                errors.first_name &&
                touched.first_name &&
-               "border-red-500 border-2"
+               `border-red-500 border-2 focus:border-red-500 focus:outline-none`
              }`}
             placeholder="Emiliano"
           />
@@ -76,7 +76,7 @@ function DriverToolbarFilters({ fetchFilteredData }) {
         <div className="flex flex-col">
           <label
             htmlFor="last_name"
-            className="ml-2 mb-1 text-sm text-neutral-600"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
           >
             Last name
           </label>
@@ -86,13 +86,12 @@ function DriverToolbarFilters({ fetchFilteredData }) {
             value={values.last_name}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-100
-             text-neutral-800 placeholder:text-neutral-500
-             focus:border-transparent focus:outline-none w-56
+            className={`px-4 py-1 rounded-lg bg-neutral-200
+             text-neutral-800 placeholder:text-neutral-400 w-56
              ${
                errors.last_name &&
                touched.last_name &&
-               "border-red-500 border-2"
+               `border-red-500 border-2 focus:border-red-500 focus:outline-none`
              }`}
             placeholder="Rodriguez"
           />
@@ -102,7 +101,96 @@ function DriverToolbarFilters({ fetchFilteredData }) {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="usage" className="ml-2 mb-1 text-sm text-neutral-600">
+          <label
+            htmlFor="address"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
+          >
+            Address
+          </label>
+          <input
+            type="text"
+            name="address"
+            value={values.address}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`px-4 py-1 rounded-lg bg-neutral-200
+             text-neutral-800 placeholder:text-neutral-400
+ z-10
+             ${
+               errors.address &&
+               touched.address &&
+               `border-red-500 border-2 focus:border-red-500 focus:outline-none`
+             }`}
+            placeholder="Av. Rivera 1234"
+          />
+          {errors.address && touched.address && (
+            <p className="text-xs text-red-500 mt-1 ml-2">{errors.address}</p>
+          )}
+        </div>
+      </div>
+
+      <div className="relative flex space-x-10">
+        <div className="flex flex-col">
+          <label
+            htmlFor="phone"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
+          >
+            Phone
+          </label>
+          <input
+            type="text"
+            name="phone"
+            value={values.phone}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`px-4 py-1 rounded-lg bg-neutral-200
+             text-neutral-800 placeholder:text-neutral-400
+             z-10 w-48
+             ${
+               errors.phone &&
+               touched.phone &&
+               `border-red-500 border-2 focus:border-red-500 focus:outline-none`
+             }`}
+            placeholder="094655951"
+          />
+          {errors.phone && touched.phone && (
+            <p className="text-xs text-red-500 mt-1 ml-2">{errors.phone}</p>
+          )}
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="email"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
+          >
+            Email
+          </label>
+          <input
+            type="text"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`px-4 py-1 rounded-lg bg-neutral-200
+             text-neutral-800 placeholder:text-neutral-400
+             z-10 w-64
+             ${
+               errors.email &&
+               touched.email &&
+               `border-red-500 border-2 focus:border-red-500 focus:outline-none`
+             }`}
+            placeholder="user@provider.com"
+          />
+          {errors.email && touched.email && (
+            <p className="text-xs text-red-500 mt-1 ml-2">{errors.email}</p>
+          )}
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="usage"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
+          >
             Identification
           </label>
           <div className="flex relative">
@@ -112,13 +200,13 @@ function DriverToolbarFilters({ fetchFilteredData }) {
               value={values.id_number}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-4 py-1 rounded-l-lg bg-neutral-100
-                 text-neutral-800 placeholder:text-neutral-500
-                 w-48 focus:border-transparent focus:outline-none
+              className={`px-4 py-1 rounded-l-lg bg-neutral-200
+                 text-neutral-800 placeholder:text-neutral-400
+                 w-40 z-10
                  ${
                    errors.id_number &&
                    touched.id_number &&
-                   "border-red-500 border-2"
+                   `border-red-500 border-2 focus:border-red-500 focus:outline-none`
                  }`}
               placeholder="57675647"
             />
@@ -127,7 +215,7 @@ function DriverToolbarFilters({ fetchFilteredData }) {
               value={values.id_type}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`px-6 py-1 rounded-r-lg bg-neutral-100
+              className={`px-6 py-1 rounded-r-lg bg-neutral-200
              text-neutral-800 hover:bg-neutral-300 border-l-2 border-neutral-300
              ${errors.id_type && touched.id_type && "border-red-500 border-2"}`}
             >
@@ -154,79 +242,14 @@ function DriverToolbarFilters({ fetchFilteredData }) {
             )}
           </div>
         </div>
-      </div>
-      <div className="relative flex space-x-10">
-        <div className="flex flex-col">
-          <label htmlFor="phone" className="ml-2 mb-1 text-sm text-neutral-600">
-            Phone
-          </label>
-          <input
-            type="text"
-            name="phone"
-            value={values.phone}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-100
-             text-neutral-800 placeholder:text-neutral-500
-             focus:border-transparent focus:outline-none w-56
-             ${errors.phone && touched.phone && "border-red-500 border-2"}`}
-            placeholder="+598 98 765 432"
-          />
-          {errors.phone && touched.phone && (
-            <p className="text-xs text-red-500 mt-1 ml-2">{errors.phone}</p>
-          )}
-        </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="email" className="ml-2 mb-1 text-sm text-neutral-600">
-            Email
-          </label>
-          <input
-            type="text"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-100
-             text-neutral-800 placeholder:text-neutral-500
-             focus:border-transparent focus:outline-none w-64
-             ${errors.email && touched.email && "border-red-500 border-2"}`}
-            placeholder="user@provider.com"
-          />
-          {errors.email && touched.email && (
-            <p className="text-xs text-red-500 mt-1 ml-2">{errors.email}</p>
-          )}
-        </div>
-
-        <div className="flex flex-col">
-          <label
-            htmlFor="address"
-            className="ml-2 mb-1 text-sm text-neutral-600"
-          >
-            Address
-          </label>
-          <input
-            type="text"
-            name="address"
-            value={values.address}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={`px-4 py-1 rounded-lg bg-neutral-100
-             text-neutral-800 placeholder:text-neutral-500
-             focus:border-transparent focus:outline-none
-             ${errors.address && touched.address && "border-red-500 border-2"}`}
-            placeholder="Av. Rivera 1234"
-          />
-          {errors.address && touched.address && (
-            <p className="text-xs text-red-500 mt-1 ml-2">{errors.address}</p>
-          )}
-        </div>
         <button
           type="submit"
           className="absolute bottom-0 right-0 py-4 px-4 rounded-full
-             bg-red-300 hover:bg-red-400"
+             bg-blue-400 border-2 border-blue-400 hover:text-blue-400
+              hover:bg-neutral-50 shadow-md text-neutral-50"
         >
-          <BsSearch />
+          <FaSearch />
         </button>
       </div>
     </form>

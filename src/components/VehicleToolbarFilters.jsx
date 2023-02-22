@@ -52,7 +52,7 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
         <div className="flex flex-col">
           <label
             htmlFor="license_plate"
-            className="ml-2 mb-1 text-sm text-neutral-500 font-bold"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
           >
             License
           </label>
@@ -78,10 +78,11 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             </p>
           )}
         </div>
+
         <div className="flex flex-col">
           <label
             htmlFor="license"
-            className="ml-2 mb-1 text-sm text-neutral-500 font-bold"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
           >
             Model
           </label>
@@ -105,10 +106,11 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
             <p className="text-xs text-red-500 mt-1 ml-2">{errors.model}</p>
           )}
         </div>
+
         <div className="flex flex-col">
           <label
             htmlFor="license"
-            className="ml-2 mb-1 text-sm text-neutral-500 font-bold"
+            className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
           >
             Status
           </label>
@@ -140,10 +142,11 @@ function VehicleToolbarFilters({ fetchFilteredData }) {
           )}
         </div>
       </div>
+
       <div className="flex flex-col">
         <label
           htmlFor="license"
-          className="ml-2 mb-1 text-sm text-neutral-500 font-bold"
+          className="ml-2 mb-1 text-sm text-neutral-500 font-bold italic"
         >
           Usage
         </label>
