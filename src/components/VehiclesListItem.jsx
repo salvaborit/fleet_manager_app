@@ -107,6 +107,11 @@ function VehiclesListItem({ vehicle }) {
           </button>
         </td>
       </tr>
+      <ViewVehicleModal
+        isOpen={isOpenViewModal}
+        toggle={toggleViewModal}
+        vehicle={vehicle}
+      />
       <EditVehicleModal
         isOpen={isOpenEditModal}
         toggle={toggleEditModal}
@@ -115,11 +120,6 @@ function VehiclesListItem({ vehicle }) {
       <DeleteVehicleModal
         isOpen={isOpenDeleteModal}
         toggle={toggleDeleteModal}
-        vehicle={vehicle}
-      />
-      <ViewVehicleModal
-        isOpen={isOpenViewModal}
-        toggle={toggleViewModal}
         vehicle={vehicle}
       />
     </>

@@ -101,7 +101,10 @@ function ViewVehicleModal({ isOpen, toggle, vehicle }) {
           <p className="ml-1 text-sm italic font-bold text-neutral-500 mb-1">
             Notes
           </p>
-          <p className="text-md italic text-neutral-700 mb-6 p-2 rounded-lg border-2">
+          <p
+            className="text-md italic text-neutral-700 mb-6 p-2 rounded-lg border-2
+          border-neutral-400"
+          >
             {renderVehicleNotes()}
           </p>
         </div>

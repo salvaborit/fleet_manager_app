@@ -1,10 +1,4 @@
 import React, { useState } from "react";
-import {
-  BsInfoCircleFill,
-  BsPencil,
-  BsPerson,
-  BsTrashFill,
-} from "react-icons/bs";
 import { TbEdit, TbInfoCircle, TbTrash } from "react-icons/tb";
 import DeleteDriverModal from "./DeleteDriverModal";
 import EditDriverModal from "./EditDriverModal";
