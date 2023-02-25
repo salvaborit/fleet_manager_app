@@ -4,7 +4,7 @@ function ViewDriverModal({ isOpen, toggle, driver }) {
   return (
     <div
       className={`z-20 w-screen h-screen left-0 top-0 fixed
-    flex flex-col justify-center items-center bg-neutral-600/50
+    flex justify-center items-center bg-neutral-600/50
     ${isOpen ? "visible" : "invisible"}`}
     >
       <div
@@ -16,23 +16,22 @@ function ViewDriverModal({ isOpen, toggle, driver }) {
         </h1>
         <h2 className="text-2xl mb-6">{driver.birthdate}</h2>
 
-        <div className="flex space-x-12">
-          <div>
-            <p className="ml-1 text-sm italic font-bold text-neutral-500">
-              Contact info
-            </p>
-            <p className="text-2xl">{driver.address}</p>
-            <p className="text-2xl">{driver.phone}</p>
-            <p className="text-2xl">{driver.email}</p>
-          </div>
-          <div>
-            <p className="ml-1 text-sm italic font-bold text-neutral-500">
-              Identification
-            </p>
-            <h2 className="text-2xl mb-6">
-              {driver.id_type} {driver.id_number}
-            </h2>
-          </div>
+        <div className="flex flex-col mb-4">
+          <p className="ml-1 text-sm italic font-bold text-neutral-500">
+            Contact info
+          </p>
+          <p className="text-2xl">{driver.phone}</p>
+          <p className="text-2xl">{driver.email}</p>
+          <p className="text-2xl">{driver.address}</p>
+        </div>
+
+        <div className="flex flex-col">
+          <p className="ml-1 text-sm italic font-bold text-neutral-500">
+            Identification
+          </p>
+          <h2 className="text-2xl mb-6">
+            {driver.id_type} {driver.id_number}
+          </h2>
         </div>
 
         <div className="flex mt-6">

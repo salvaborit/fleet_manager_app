@@ -1,9 +1,9 @@
 import React from "react";
-import { BsQuestion, BsSearch } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { BsQuestion } from "react-icons/bs";
 import { MdOutlineSearch } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
 import { TbManualGearbox } from "react-icons/tb";
-import { Link } from "react-router-dom";
 
 function NewTopBar() {
   const iconSize = 20;

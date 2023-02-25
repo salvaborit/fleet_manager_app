@@ -23,7 +23,7 @@ function VehiclesList({ vehiclesList }) {
     },
   ];
   return (
-    <table className="flex flex-col w-full overflow-y-auto mx-0">
+    <table className="flex flex-col w-full mx-0">
       <thead>
         <tr
           className="flex text-left mb-6 bg-neutral-200 py-3 text-neutral-600
