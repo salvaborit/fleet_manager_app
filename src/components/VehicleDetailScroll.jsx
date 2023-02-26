@@ -62,10 +62,10 @@ function VehicleDetailScroll() {
                    text-neutral-600 shadow-inner rounded-t-xl"
               >
                 <th className="w-2/5 pl-10 flex items-center">Title</th>
-                <th className="w-1/6 flex items-center justify-center">
+                <th className="w-1/6 pl-3 flex items-center justify-center">
                   Expiry
                 </th>
-                <th className="w-1/12 flex items-center">Status</th>
+                <th className="w-1/12 pl-5 flex items-center">Status</th>
                 <th className="w-1/4 text-center pr-10">Actions</th>
               </tr>
             </thead>

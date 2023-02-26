@@ -55,7 +55,8 @@ function VehicleDocsListItem({ docItem }) {
 
     return (
       <td
-        className={`${styles} flex items-center justify-center h-min w-1/12 font-bold rounded-lg px-2 py-1
+        className={`${styles} flex items-center justify-center h-min w-1/12 font-bold
+         rounded-lg py-1
         text-center text-xs overflow-hidden`}
       >
         {statusName}
