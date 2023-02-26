@@ -6,6 +6,7 @@ import VehicleDocumentationsModal from "./VehicleDocumentationsModal";
 import ViewVehicleModal from "./ViewVehicleModal";
 
 import { TbInfoCircle, TbEdit, TbTrash, TbFile } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 function VehiclesListItem({ vehicle }) {
   const [isOpenViewModal, setIsOpenViewModal] = useState(false);
@@ -89,15 +90,17 @@ function VehiclesListItem({ vehicle }) {
           className={`flex text-center justify-center text-sm space-x-2 py-1
            m-auto ${isHovered ? "visible" : "invisible"}`}
         >
-          <button
-            onClick={toggleViewModal}
-            className="flex items-center justify-center border-2 w-8 h-8 rounded-lg shadow-lg
-              text-neutral-400 border-neutral-400 hover:bg-neutral-200
-              hover:text-neutral-500"
-          >
-            <TbInfoCircle size={iconSize} />
-          </button>{" "}
-          <button
+          <Link to={`/vehicles/${vehicle.id}/`}>
+            <button
+              // onClick={toggleViewModal}
+              className="flex items-center justify-center border-2 w-8 h-8 rounded-lg shadow-lg
+                text-neutral-400 border-neutral-400 hover:bg-neutral-200
+                hover:text-neutral-500"
+            >
+              <TbInfoCircle size={iconSize} />
+            </button>
+          </Link>{" "}
+          {/* <button
             onClick={toggleDocsModal}
             className="flex items-center justify-center border-2 w-8 h-8 rounded-lg shadow-lg
               text-orange-300 border-orange-300 hover:bg-orange-200
@@ -112,7 +115,7 @@ function VehiclesListItem({ vehicle }) {
               hover:text-blue-400"
           >
             <TbEdit size={iconSize} />
-          </button>
+          </button> */}
           <button
             onClick={toggleDeleteModal}
             className="flex items-center justify-center border-2 w-8 h-8 rounded-lg shadow-lg
@@ -128,7 +131,7 @@ function VehiclesListItem({ vehicle }) {
         toggle={toggleViewModal}
         vehicle={vehicle}
       />
-      <VehicleDocumentationsModal
+      {/* <VehicleDocumentationsModal
         isOpen={isOpenDocsModal}
         toggle={toggleDocsModal}
         vehicle={vehicle}
@@ -137,7 +140,7 @@ function VehiclesListItem({ vehicle }) {
         isOpen={isOpenEditModal}
         toggle={toggleEditModal}
         vehicle={vehicle}
-      />
+      /> */}
       <DeleteVehicleModal
         isOpen={isOpenDeleteModal}
         toggle={toggleDeleteModal}

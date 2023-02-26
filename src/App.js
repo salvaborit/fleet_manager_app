@@ -11,11 +11,12 @@ import HelpRoute from "./components/HelpRoute";
 import HomeRoute from "./components/HomeRoute";
 import NewNavBar from "./components/NewNavBar";
 import NewTopBar from "./components/NewTopBar";
+import NotFound404 from "./components/NotFound404";
 
 function App() {
   const routes = useRoutes([
     {
-      path: "/login",
+      path: "login",
       element: <Login />,
     },
     {
@@ -23,21 +24,22 @@ function App() {
       element: <HomeRoute />,
     },
     {
-      path: "/vehicles",
+      path: "vehicles/*",
       element: <VehiclesRoute />,
     },
     {
-      path: "/drivers",
+      path: "drivers/*",
       element: <DriversRoute />,
     },
     {
-      path: "/settings",
+      path: "settings",
       element: <SettingsRoute />,
     },
     {
-      path: "/help",
+      path: "help",
       element: <HelpRoute />,
     },
+    { path: "*", element: <NotFound404 /> },
   ]);
 
   //  For collapsible meni

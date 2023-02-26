@@ -32,7 +32,7 @@ function DocsModalListItem({ docItem }) {
 
   return (
     <tr
-      className="flex text-neutral-700 hover:bg-neutral-100 hover:shadow-inner
+      className="flex text-neutral-700 hover:bg-neutral-50 hover:shadow-inner
       text-sm"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -46,13 +46,6 @@ function DocsModalListItem({ docItem }) {
         className={`flex text-center justify-center text-sm space-x-2 py-1
            m-auto ${isHovered ? "visible" : "invisible"} pr-10`}
       >
-        <button
-          className="flex items-center justify-center border-2 w-8 h-8 rounded-lg shadow-lg
-              text-neutral-400 border-neutral-400 hover:bg-neutral-200
-              hover:text-neutral-500"
-        >
-          <TbInfoCircle size={iconSize} />
-        </button>{" "}
         <button
           className="flex items-center justify-center border-2 w-8 h-8 rounded-lg shadow-lg
               text-orange-300 border-orange-300 hover:bg-orange-200

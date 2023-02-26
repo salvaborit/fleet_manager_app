@@ -1,24 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { TbTruck } from "react-icons/tb";
+import { TbUsers } from "react-icons/tb";
+import DriversList from "./DriversList";
+import DriversToolbar from "./DriversToolbar";
 import Loading from "./Loading";
-import VehiclesList from "./VehiclesList";
-import VehiclesToolbar from "./VehiclesToolbar";
 
-function VehicleListView() {
-  const [vehiclesList, setVehiclesList] = useState([]);
+function DriverListView() {
+  const [driversList, setDriversList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchData() {
     setIsLoading(true);
-    const resp = await axios.get("http://localhost:8000/vehicles/");
-    setVehiclesList(resp.data);
+    const resp = await axios.get("http://localhost:8000/drivers/");
+    setDriversList(resp.data);
     setIsLoading(false);
   }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   async function fetchFilteredData(queryParams) {
     let queryParamStr = "";
@@ -29,27 +25,31 @@ function VehicleListView() {
     }
     setIsLoading(true);
     const resp = await axios.get(
-      `http://localhost:8000/vehicles/?${queryParamStr}`
+      `http://localhost:8000/drivers/?${queryParamStr}`
     );
-    setVehiclesList(resp.data);
+    setDriversList(resp.data);
     setIsLoading(false);
   }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       <div className="flex items-center mr-16 mb-8 mt-6">
-        <TbTruck size={40} className="text-neutral-500" />
-        <h1 className="text-2xl font-bold text-neutral-500 ml-8">Vehicles</h1>
+        <TbUsers size={40} className="text-neutral-500" />
+        <h1 className="text-2xl font-bold text-neutral-500 ml-8">Drivers</h1>
       </div>
 
       <div className="flex flex-col bg-neutral-50 rounded-2xl shadow-lg">
         <div>
-          <VehiclesToolbar
+          <DriversToolbar
             fetchFilteredData={fetchFilteredData}
             isLoading={isLoading}
           />
         </div>
         <div className="container self-center pb-8">
-          {!isLoading && <VehiclesList vehiclesList={vehiclesList} />}
+          {!isLoading && <DriversList driversList={driversList} />}
         </div>
       </div>
       {isLoading && <Loading />}
@@ -57,4 +57,4 @@ function VehicleListView() {
   );
 }
 
-export default VehicleListView;
+export default DriverListView;
