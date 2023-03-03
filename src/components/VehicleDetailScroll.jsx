@@ -74,6 +74,7 @@ function VehicleDetailScroll() {
                 docsList.map((item) => {
                   return (
                     <VehicleDocsListItem
+                      key={item.id}
                       docItem={item}
                       vehicleList={vehicleList}
                     />

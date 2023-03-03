@@ -121,7 +121,7 @@ function VehicleDocumentationsModal({ isOpen, toggle, vehicle }) {
               <tbody>
                 {docsList &&
                   docsList.map((item) => {
-                    return <DocsModalListItem docItem={item} />;
+                    return <DocsModalListItem key={item.id} docItem={item} />;
                   })}
               </tbody>
             </table>

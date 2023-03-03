@@ -77,7 +77,7 @@ function NewDocModal({ isOpen, toggle, vehicleId }) {
                 `border-red-500 border-2
                  focus:border-red-500 focus:outline-none`
               }`}
-            placeholder="Permiso Nacional de Conduccion"
+            placeholder="IFTA Certificate"
           />
           {errors.title && touched.title && (
             <p className="text-xs text-red-500 mt-1 ml-2">{errors.title}</p>
